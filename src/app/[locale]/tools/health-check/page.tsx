@@ -1,0 +1,38 @@
+import { setRequestLocale } from "next-intl/server";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
+import { ArrowLeft, Stethoscope } from "lucide-react";
+import { HealthCheckClient } from "./HealthCheckClient";
+import { routing } from "@/i18n/routing";
+import type { Metadata } from "next";
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
+export const metadata: Metadata = { title: "Config Health Check — uumax" };
+
+export default async function HealthCheckPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  return <HealthCheckContent />;
+}
+
+function HealthCheckContent() {
+  const t = useTranslations("healthCheck");
+  return (
+    <div className="max-w-3xl mx-auto px-4 py-10">
+      <Link href="/" className="inline-flex items-center gap-1 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] mb-6 transition-colors">
+        <ArrowLeft size={14} /> {t("backHome")}
+      </Link>
+      <div className="flex items-center gap-3 mb-2">
+        <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+          <Stethoscope size={20} className="text-emerald-500" />
+        </div>
+        <h1 className="text-3xl font-bold">{t("title")}</h1>
+      </div>
+      <p className="text-lg text-[var(--fg-muted)] mb-8">{t("subtitle")}</p>
+      <HealthCheckClient />
+    </div>
+  );
+}

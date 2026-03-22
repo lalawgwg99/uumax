@@ -29,6 +29,9 @@ function generateSitemap() {
     pages.push({ url: `/${locale}/configs`, priority: "0.9", changefreq: "daily" });
     pages.push({ url: `/${locale}/contributors`, priority: "0.6", changefreq: "weekly" });
     pages.push({ url: `/${locale}/generate`, priority: "0.7", changefreq: "monthly" });
+    pages.push({ url: `/${locale}/tools/health-check`, priority: "0.6", changefreq: "monthly" });
+    pages.push({ url: `/${locale}/tools/compare`, priority: "0.6", changefreq: "monthly" });
+    pages.push({ url: `/${locale}/tools/remix`, priority: "0.6", changefreq: "monthly" });
     pages.push({ url: `/${locale}/submit`, priority: "0.5", changefreq: "monthly" });
     for (const slug of slugs) {
       pages.push({ url: `/${locale}/configs/${slug}`, priority: "0.8", changefreq: "weekly" });

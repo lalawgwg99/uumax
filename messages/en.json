@@ -3,6 +3,9 @@
     "browse": "Browse",
     "submit": "Submit",
     "generate": "Generate",
+    "healthCheck": "Health Check",
+    "compare": "Compare",
+    "remix": "Remix",
     "github": "GitHub"
   },
   "hero": {
@@ -124,5 +127,54 @@
     "changeKey": "Change API key",
     "clearChat": "Clear",
     "thinking": "Thinking..."
+  },
+  "finder": {
+    "title": "Config Finder",
+    "welcome": "What are you working on?",
+    "hint": "Tell me your tools and project, I'll find the right config.",
+    "placeholder": "e.g. React project with Cursor...",
+    "quick1": "Claude Code + fullstack",
+    "quick2": "Cursor + React",
+    "quick3": "Best for beginners",
+    "needApiKey": "Please set your OpenRouter API key first. Visit any config page and click 'Try it' to set it up."
+  },
+  "healthCheck": {
+    "title": "Config Health Check",
+    "subtitle": "Paste your existing config and get an AI-powered quality review with actionable improvements.",
+    "backHome": "Home",
+    "placeholder": "Paste your CLAUDE.md, .cursorrules, or any agent config here...",
+    "check": "Analyze Config",
+    "checking": "Analyzing...",
+    "checkAnother": "Check another config",
+    "needApiKey": "Please set your OpenRouter API key first."
+  },
+  "compare": {
+    "title": "Compare Configs",
+    "subtitle": "Pick two configurations and get an AI-powered side-by-side analysis.",
+    "backHome": "Home",
+    "configA": "Config A",
+    "configB": "Config B",
+    "select": "Select a config...",
+    "compare": "Compare",
+    "comparing": "Comparing...",
+    "needApiKey": "Please set your OpenRouter API key first."
+  },
+  "remix": {
+    "title": "Remix Config",
+    "subtitle": "Fork any config and customize it with AI for your specific project.",
+    "backHome": "Home",
+    "baseConfig": "Base Config",
+    "select": "Select a config to remix...",
+    "customize": "How do you want to customize it?",
+    "customizePlaceholder": "e.g. Change from React to Vue, add Tailwind CSS rules, use pnpm instead of npm...",
+    "remix": "Remix",
+    "remixing": "Remixing...",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "needApiKey": "Please set your OpenRouter API key first."
+  },
+  "tools": {
+    "title": "AI Tools",
+    "subtitle": "Free AI-powered tools to help you get the most out of your agent configs."
   }
 }

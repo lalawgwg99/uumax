@@ -3,6 +3,9 @@
     "browse": "瀏覽",
     "submit": "投稿",
     "generate": "產生器",
+    "healthCheck": "健康檢查",
+    "compare": "比較",
+    "remix": "重混",
     "github": "GitHub"
   },
   "hero": {
@@ -124,5 +127,54 @@
     "changeKey": "更換 API 金鑰",
     "clearChat": "清除",
     "thinking": "思考中..."
+  },
+  "finder": {
+    "title": "配置推薦助手",
+    "welcome": "你在做什麼專案？",
+    "hint": "告訴我你用什麼工具和專案類型，我幫你找最適合的配置。",
+    "placeholder": "例如：用 Cursor 寫 React 專案...",
+    "quick1": "Claude Code + 全端",
+    "quick2": "Cursor + React",
+    "quick3": "適合新手的",
+    "needApiKey": "請先設定 OpenRouter API 金鑰。到任意配置頁點「試用」來設定。"
+  },
+  "healthCheck": {
+    "title": "配置健康檢查",
+    "subtitle": "貼上你現有的配置，AI 幫你評分並給出改善建議。",
+    "backHome": "首頁",
+    "placeholder": "在這裡貼上你的 CLAUDE.md、.cursorrules 或任何 agent 配置...",
+    "check": "分析配置",
+    "checking": "分析中...",
+    "checkAnother": "檢查另一個配置",
+    "needApiKey": "請先設定 OpenRouter API 金鑰。"
+  },
+  "compare": {
+    "title": "比較配置",
+    "subtitle": "選兩個配置，AI 幫你做並排分析比較。",
+    "backHome": "首頁",
+    "configA": "配置 A",
+    "configB": "配置 B",
+    "select": "選擇配置...",
+    "compare": "比較",
+    "comparing": "比較中...",
+    "needApiKey": "請先設定 OpenRouter API 金鑰。"
+  },
+  "remix": {
+    "title": "重混配置",
+    "subtitle": "Fork 任何配置，用 AI 客製化成你專案需要的版本。",
+    "backHome": "首頁",
+    "baseConfig": "基底配置",
+    "select": "選擇要重混的配置...",
+    "customize": "你想怎麼客製化？",
+    "customizePlaceholder": "例如：把 React 改成 Vue、加入 Tailwind CSS 規範、用 pnpm 取代 npm...",
+    "remix": "重混",
+    "remixing": "重混中...",
+    "copy": "複製",
+    "copied": "已複製！",
+    "needApiKey": "請先設定 OpenRouter API 金鑰。"
+  },
+  "tools": {
+    "title": "AI 工具",
+    "subtitle": "免費 AI 工具，幫你更好地使用 agent 配置。"
   }
 }
