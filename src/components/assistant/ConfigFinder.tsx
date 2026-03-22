@@ -3,7 +3,7 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { MessageSquareText, X, Send, Sparkles } from "lucide-react";
-import { FREE_MODELS, streamChat } from "@/lib/openrouter";
+import { FREE_MODELS, streamChat, getApiKey, consumeFreeTier } from "@/lib/openrouter";
 import type { ChatMessage } from "@/lib/openrouter";
 import type { ConfigMeta } from "@/lib/types";
 
@@ -53,8 +53,8 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
   const handleSend = useCallback(async () => {
     if (!input.trim() || isStreaming) return;
 
-    const apiKey = localStorage.getItem("openrouter-api-key");
-    if (!apiKey) {
+    const auth = getApiKey();
+    if (!auth) {
       setMessages((prev) => [
         ...prev,
         { role: "user", content: input.trim() },
@@ -63,6 +63,8 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
       setInput("");
       return;
     }
+    const apiKey = auth.key;
+    const isFreeTier = auth.isFreeTier;
 
     const userMsg: ChatMessage = { role: "user", content: input.trim() };
     const updated = [...messages, userMsg];
@@ -84,6 +86,7 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
         full += chunk;
         setMessages([...updated, { role: "assistant", content: full }]);
       }
+      if (isFreeTier) consumeFreeTier();
     } catch {
       // ignore errors silently
     } finally {

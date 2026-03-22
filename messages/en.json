@@ -3,9 +3,7 @@
     "browse": "Browse",
     "submit": "Submit",
     "generate": "Generate",
-    "healthCheck": "Health Check",
-    "compare": "Compare",
-    "remix": "Remix",
+    "tools": "Tools",
     "github": "GitHub"
   },
   "hero": {
@@ -175,6 +173,11 @@
   },
   "tools": {
     "title": "AI Tools",
-    "subtitle": "Free AI-powered tools to help you get the most out of your agent configs."
+    "subtitle": "Free AI-powered tools to help you get the most out of your agent configs.",
+    "health-check": "Health Check",
+    "compare": "Compare",
+    "remix": "Remix",
+    "freeRemaining": "{count} free uses left today",
+    "unlimitedKey": "Using your own API key"
   }
 }

@@ -16,6 +16,61 @@ export const FREE_MODELS: ModelOption[] = [
   { id: "mistralai/mistral-small-3.2-24b-instruct:free", name: "Mistral Small 3.2" },
 ];
 
+// Public free tier: limited daily uses with a shared key
+const PUBLIC_KEY = "sk-or-v1-free-tier-uumax";
+const DAILY_LIMIT = 5;
+const USAGE_KEY = "uumax-free-usage";
+
+interface UsageRecord {
+  date: string;
+  count: number;
+}
+
+function getUsageToday(): UsageRecord {
+  try {
+    const raw = localStorage.getItem(USAGE_KEY);
+    if (raw) {
+      const record: UsageRecord = JSON.parse(raw);
+      const today = new Date().toISOString().slice(0, 10);
+      if (record.date === today) return record;
+    }
+  } catch {}
+  return { date: new Date().toISOString().slice(0, 10), count: 0 };
+}
+
+function incrementUsage(): void {
+  const record = getUsageToday();
+  record.count++;
+  localStorage.setItem(USAGE_KEY, JSON.stringify(record));
+}
+
+export function getFreeTierRemaining(): number {
+  const record = getUsageToday();
+  return Math.max(0, DAILY_LIMIT - record.count);
+}
+
+/**
+ * Get the best available API key.
+ * Priority: user's own key > public free tier (with daily limit)
+ * Returns { key, isFreeTier } or null if no key available.
+ */
+export function getApiKey(): { key: string; isFreeTier: boolean } | null {
+  const userKey = localStorage.getItem("openrouter-api-key");
+  if (userKey) return { key: userKey, isFreeTier: false };
+
+  const remaining = getFreeTierRemaining();
+  if (remaining > 0) return { key: PUBLIC_KEY, isFreeTier: true };
+
+  return null;
+}
+
+/**
+ * Call after a successful free-tier request to decrement remaining uses.
+ */
+export function consumeFreeTier(): void {
+  incrementUsage();
+}
+
 export async function* streamChat(
   apiKey: string,
   model: string,
