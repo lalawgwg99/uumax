@@ -20,9 +20,9 @@ export function Giscus({ slug }: GiscusProps) {
     const script = document.createElement("script");
     script.src = "https://giscus.app/client.js";
     script.setAttribute("data-repo", "lalawgwg99/uumax");
-    script.setAttribute("data-repo-id", "");
-    script.setAttribute("data-category", "Configs");
-    script.setAttribute("data-category-id", "");
+    script.setAttribute("data-repo-id", "R_kgDORtjQEg");
+    script.setAttribute("data-category", "General");
+    script.setAttribute("data-category-id", "DIC_kwDORtjQEs4C5BKD");
     script.setAttribute("data-mapping", "specific");
     script.setAttribute("data-term", slug);
     script.setAttribute("data-strict", "0");
