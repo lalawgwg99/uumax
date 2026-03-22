@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { ConfigMeta, Framework, UseCase } from "@/lib/types";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import { ConfigCard } from "@/components/configs/ConfigCard";
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export function ConfigsClient({ configs }: Props) {
+  const t = useTranslations("configs");
   const [framework, setFramework] = useState<string>("");
   const [useCase, setUseCase] = useState<string>("");
   const [search, setSearch] = useState("");
@@ -49,25 +51,23 @@ export function ConfigsClient({ configs }: Props) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
-      <h1 className="text-3xl font-bold mb-2">Browse Configs</h1>
+      <h1 className="text-3xl font-bold mb-2">{t("title")}</h1>
       <p className="text-[var(--fg-muted)] mb-8">
-        {filtered.length} configurations available
+        {t("count", { count: filtered.length })}
       </p>
 
-      {/* Search */}
       <input
         type="text"
-        placeholder="Search configs..."
+        placeholder={t("search")}
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         className="w-full max-w-md mb-6 px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--fg-muted)] focus:outline-none focus:border-[var(--color-brand)]"
       />
 
-      {/* Filters */}
       <div className="space-y-3 mb-8">
         <div className="flex flex-wrap gap-2">
           <span className="text-xs font-medium text-[var(--fg-muted)] self-center mr-1">
-            Framework:
+            {t("framework")}
           </span>
           {FRAMEWORKS.map((fw) => (
             <button
@@ -85,7 +85,7 @@ export function ConfigsClient({ configs }: Props) {
         </div>
         <div className="flex flex-wrap gap-2">
           <span className="text-xs font-medium text-[var(--fg-muted)] self-center mr-1">
-            Use Case:
+            {t("useCase")}
           </span>
           {USE_CASES.map((uc) => (
             <button
@@ -103,10 +103,9 @@ export function ConfigsClient({ configs }: Props) {
         </div>
       </div>
 
-      {/* Grid */}
       {filtered.length === 0 ? (
         <div className="text-center py-16 text-[var(--fg-muted)]">
-          <p>No configs match your filters. Try adjusting them.</p>
+          <p>{t("empty")}</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

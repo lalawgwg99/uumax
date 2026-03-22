@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS } from "@/lib/types";
 import type { ConfigMeta } from "@/lib/types";
@@ -16,15 +16,11 @@ export function ConfigCard({ config }: ConfigCardProps) {
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex flex-wrap gap-1.5">
-          <Badge variant="brand">
-            {FRAMEWORK_LABELS[config.framework]}
-          </Badge>
+          <Badge variant="brand">{FRAMEWORK_LABELS[config.framework]}</Badge>
           {config.pricing === "premium" && (
             <Badge variant="amber">${config.price}</Badge>
           )}
-          {config.pricing === "free" && (
-            <Badge variant="green">Free</Badge>
-          )}
+          {config.pricing === "free" && <Badge variant="green">Free</Badge>}
         </div>
       </div>
 

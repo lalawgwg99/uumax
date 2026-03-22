@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "browse": "Browse",
+    "submit": "Submit",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "AI Agent Config Marketplace",
+    "title1": "Stop configuring.",
+    "title2": "Start building.",
+    "description": "Production-ready configurations for Claude Code, Cursor, OpenClaw, and more. Copy, paste, and let your AI agent work the way you want.",
+    "browseCta": "Browse Configs",
+    "contributeCta": "Contribute"
+  },
+  "howItWorks": {
+    "title": "How it works",
+    "browse": "Browse",
+    "browseDesc": "Find configs by framework, use case, or tags. Every config is reviewed for quality.",
+    "copy": "Copy & Paste",
+    "copyDesc": "One-click copy. Drop it into your project as CLAUDE.md, .cursorrules, or any config file.",
+    "share": "Share & Sell",
+    "shareDesc": "Submit your configs via GitHub PR. Free or premium — you set the price."
+  },
+  "featured": {
+    "title": "Featured Configs",
+    "viewAll": "View all"
+  },
+  "frameworks": {
+    "title": "Supported Frameworks",
+    "configs": "{count} configs"
+  },
+  "cta": {
+    "title": "Got a killer agent config?",
+    "description": "Share it with the community or sell it as a premium config. Your expertise, your rules, your revenue.",
+    "button": "Submit via GitHub"
+  },
+  "configs": {
+    "title": "Browse Configs",
+    "count": "{count} configurations available",
+    "search": "Search configs...",
+    "framework": "Framework:",
+    "useCase": "Use Case:",
+    "empty": "No configs match your filters. Try adjusting them.",
+    "backToConfigs": "Back to configs",
+    "copyConfig": "Copy Config",
+    "copied": "Copied!",
+    "download": "Download",
+    "purchase": "Purchase ${price}"
+  },
+  "submit": {
+    "title": "Submit a Config",
+    "description": "Share your AI agent configuration with the community.",
+    "backHome": "Home"
+  },
+  "footer": {
+    "tagline": "Built for AI-native developers"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "This config doesn't exist yet.",
+    "goHome": "Go Home"
+  }
+}

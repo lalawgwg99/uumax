@@ -1,37 +1,45 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
+import { setRequestLocale } from "next-intl/server";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { getAllSlugs, getConfigBySlug } from "@/lib/configs";
 import { ConfigContent } from "@/components/configs/ConfigContent";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import { ArrowLeft, Download, ExternalLink, Calendar, User } from "lucide-react";
+import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
+import type { ConfigItem } from "@/lib/types";
 
-export async function generateStaticParams() {
-  return getAllSlugs().map((slug) => ({ slug }));
+export function generateStaticParams() {
+  const slugs = getAllSlugs();
+  return routing.locales.flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug }))
+  );
 }
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const config = getConfigBySlug(slug);
   if (!config) return {};
-  return {
-    title: config.title,
-    description: config.description,
-  };
+  return { title: config.title, description: config.description };
 }
 
 export default async function ConfigDetailPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const config = getConfigBySlug(slug);
   if (!config) notFound();
+  return <ConfigDetailContent config={config} />;
+}
 
-  // Extract the main code block for copy button
+function ConfigDetailContent({ config }: { config: ConfigItem }) {
+  const t = useTranslations("configs");
   const codeMatch = config.content.match(/```[\w]*\n([\s\S]*?)```/);
   const mainCode = codeMatch ? codeMatch[1].trim() : "";
 
@@ -42,15 +50,12 @@ export default async function ConfigDetailPage({ params }: PageProps) {
         className="inline-flex items-center gap-1 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] mb-6 transition-colors"
       >
         <ArrowLeft size={14} />
-        Back to configs
+        {t("backToConfigs")}
       </Link>
 
-      {/* Header */}
       <div className="mb-8">
         <div className="flex flex-wrap gap-2 mb-3">
-          <Badge variant="brand">
-            {FRAMEWORK_LABELS[config.framework]}
-          </Badge>
+          <Badge variant="brand">{FRAMEWORK_LABELS[config.framework]}</Badge>
           {config.useCases.map((uc) => (
             <Badge key={uc}>{USECASE_LABELS[uc]}</Badge>
           ))}
@@ -60,12 +65,10 @@ export default async function ConfigDetailPage({ params }: PageProps) {
             <Badge variant="amber">${config.price}</Badge>
           )}
         </div>
-
         <h1 className="text-3xl font-bold mb-2">{config.title}</h1>
         <p className="text-lg text-[var(--fg-muted)] mb-4">
           {config.description}
         </p>
-
         <div className="flex flex-wrap items-center gap-4 text-sm text-[var(--fg-muted)]">
           <span className="inline-flex items-center gap-1">
             <User size={14} />
@@ -79,10 +82,8 @@ export default async function ConfigDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Actions */}
       <div className="flex flex-wrap gap-3 mb-8 p-4 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)]">
-        {mainCode && <CopyButton text={mainCode} label="Copy Config" />}
-
+        {mainCode && <CopyButton text={mainCode} label={t("copyConfig")} />}
         {mainCode && (
           <a
             href={`data:text/plain;charset=utf-8,${encodeURIComponent(mainCode)}`}
@@ -90,10 +91,9 @@ export default async function ConfigDetailPage({ params }: PageProps) {
             className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] hover:bg-[var(--border)] transition-colors"
           >
             <Download size={14} />
-            Download
+            {t("download")}
           </a>
         )}
-
         {config.pricing === "premium" && config.purchaseUrl && (
           <a
             href={config.purchaseUrl}
@@ -102,19 +102,17 @@ export default async function ConfigDetailPage({ params }: PageProps) {
             className="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm rounded-lg bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand-dark)] transition-colors"
           >
             <ExternalLink size={14} />
-            Purchase ${config.price}
+            {t("purchase", { price: config.price ?? 0 })}
           </a>
         )}
       </div>
 
-      {/* Tags */}
       <div className="flex flex-wrap gap-1.5 mb-8">
         {config.tags.map((tag) => (
           <Badge key={tag}>{tag}</Badge>
         ))}
       </div>
 
-      {/* Content */}
       <ConfigContent content={config.content} />
     </div>
   );

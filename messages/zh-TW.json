@@ -1,0 +1,63 @@
+{
+  "nav": {
+    "browse": "瀏覽",
+    "submit": "投稿",
+    "github": "GitHub"
+  },
+  "hero": {
+    "badge": "AI Agent 配置市集",
+    "title1": "別再折騰配置。",
+    "title2": "專心寫程式。",
+    "description": "現成的 Claude Code、Cursor、OpenClaw 等 AI 代理配置。複製、貼上，讓你的 AI 按照你想要的方式工作。",
+    "browseCta": "瀏覽配置",
+    "contributeCta": "貢獻配置"
+  },
+  "howItWorks": {
+    "title": "怎麼用",
+    "browse": "瀏覽",
+    "browseDesc": "按框架、場景或標籤找配置。每個配置都經過品質審核。",
+    "copy": "複製貼上",
+    "copyDesc": "一鍵複製，丟進你的專案當作 CLAUDE.md、.cursorrules 或其他配置檔。",
+    "share": "分享或販售",
+    "shareDesc": "透過 GitHub PR 投稿你的配置。免費或付費，你自己決定。"
+  },
+  "featured": {
+    "title": "精選配置",
+    "viewAll": "查看全部"
+  },
+  "frameworks": {
+    "title": "支援的框架",
+    "configs": "{count} 個配置"
+  },
+  "cta": {
+    "title": "有很讚的 Agent 配置？",
+    "description": "分享給社群，或作為付費配置上架。你的專業、你的規則、你的收入。",
+    "button": "透過 GitHub 投稿"
+  },
+  "configs": {
+    "title": "瀏覽配置",
+    "count": "共 {count} 個配置",
+    "search": "搜尋配置...",
+    "framework": "框架：",
+    "useCase": "場景：",
+    "empty": "沒有符合條件的配置，試試調整篩選。",
+    "backToConfigs": "返回配置列表",
+    "copyConfig": "複製配置",
+    "copied": "已複製！",
+    "download": "下載",
+    "purchase": "購買 ${price}"
+  },
+  "submit": {
+    "title": "投稿配置",
+    "description": "將你的 AI Agent 配置分享給社群。",
+    "backHome": "首頁"
+  },
+  "footer": {
+    "tagline": "為 AI 原生開發者而生"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "這個配置還不存在。",
+    "goHome": "回首頁"
+  }
+}
