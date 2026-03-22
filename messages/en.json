@@ -2,6 +2,7 @@
   "nav": {
     "browse": "Browse",
     "submit": "Submit",
+    "generate": "Generate",
     "github": "GitHub"
   },
   "hero": {
@@ -46,7 +47,9 @@
     "copied": "Copied!",
     "download": "Download",
     "purchase": "Purchase ${price}",
-    "related": "Related Configs"
+    "related": "Related Configs",
+    "versionHistory": "Version History",
+    "comments": "Comments & Ratings"
   },
   "submit": {
     "title": "Submit a Config",
@@ -60,6 +63,21 @@
     "title": "404",
     "message": "This config doesn't exist yet.",
     "goHome": "Go Home"
+  },
+  "generator": {
+    "title": "Config Generator",
+    "subtitle": "Describe your ideal AI agent and we'll generate a production-ready config for you.",
+    "framework": "Target Framework",
+    "describe": "Describe your config",
+    "describePlaceholder": "e.g. A React + TypeScript fullstack developer that follows clean architecture, uses Vitest for testing, and writes detailed commit messages...",
+    "generate": "Generate Config",
+    "generating": "Generating your config...",
+    "back": "Start over",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "needApiKey": "Please set your OpenRouter API key first (use the Try it button on any config page).",
+    "invalidKey": "Invalid API key. Please set a new one via any config's Try it button.",
+    "backHome": "Home"
   },
   "tryIt": {
     "button": "Try it",

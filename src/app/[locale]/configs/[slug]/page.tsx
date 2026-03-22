@@ -9,7 +9,8 @@ import { CopyButton } from "@/components/ui/CopyButton";
 import { TryItButton } from "@/components/chat/TryItButton";
 import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
-import { ArrowLeft, Download, ExternalLink, Calendar, User } from "lucide-react";
+import { Giscus } from "@/components/configs/Giscus";
+import { ArrowLeft, Download, ExternalLink, Calendar, User, History } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import type { ConfigItem } from "@/lib/types";
@@ -120,6 +121,31 @@ function ConfigDetailContent({ config, related }: { config: ConfigItem; related:
       </div>
 
       <ConfigContent content={config.content} />
+
+      {/* Version History */}
+      {config.changelog && config.changelog.length > 0 && (
+        <div className="mt-8 pt-6 border-t border-[var(--border)]">
+          <h2 className="text-lg font-semibold mb-3 inline-flex items-center gap-2">
+            <History size={18} />
+            {t("versionHistory")}
+          </h2>
+          <div className="space-y-2">
+            {config.changelog.map((entry) => (
+              <div key={entry.version} className="flex gap-3 text-sm">
+                <span className="font-mono text-[var(--color-brand)] shrink-0">v{entry.version}</span>
+                <span className="text-[var(--fg-muted)] shrink-0">{entry.date}</span>
+                <span className="text-[var(--fg-muted)]">{entry.changes}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Comments & Ratings */}
+      <div className="mt-8 pt-6 border-t border-[var(--border)]">
+        <h2 className="text-lg font-semibold mb-3">{t("comments")}</h2>
+        <Giscus slug={config.slug} />
+      </div>
 
       {related.length > 0 && (
         <div className="mt-12 pt-8 border-t border-[var(--border)]">

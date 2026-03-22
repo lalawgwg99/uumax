@@ -25,6 +25,12 @@ export function Header() {
             {t("browse")}
           </Link>
           <Link
+            href="/generate"
+            className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors"
+          >
+            {t("generate")}
+          </Link>
+          <Link
             href="/submit"
             className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors"
           >

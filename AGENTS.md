@@ -80,50 +80,26 @@ featured: true
 
 新增配置 = 新增 `.md` 檔，build 自動讀取，不改程式碼。
 
-## 當前狀態（MVP v0.1）已完成
+## 當前狀態（v0.3）
 
+### 已完成
 - 首頁（Hero, How it works, Featured, Frameworks, CTA）
-- 瀏覽頁（搜尋 + 框架篩選 + 場景篩選）
-- 詳情頁（Markdown 渲染 + 一鍵複製 + 下載）
+- 瀏覽頁（搜尋 + 框架篩選 + 場景篩選 + URL query params 可分享）
+- 詳情頁（shiki 語法高亮 + 一鍵複製 + 下載 + 版本歷史 + 相關配置 + giscus 評論）
+- OpenRouter 即時試用（串流對話，免費模型）
+- 配置產生器 `/generate`（AI 問答生成 config）
 - 投稿指南頁
-- Dark mode
-- 7 個種子配置
-- SEO metadata
-- 靜態導出
+- Dark mode + i18n（en + zh-TW）
+- 21 個種子配置（5 框架）
+- SEO metadata + sitemap.xml + robots.txt
+- 靜態導出 → Cloudflare Pages
 
-## 待開發（按優先級）
-
-### P0 — 立即需要
-
-1. **i18n** — 繁體中文 + 英文
-   - `next-intl` v4，路由 `/zh-TW/...` `/en/...`
-   - UI 翻譯：`messages/zh-TW.json`、`messages/en.json`
-   - 配置內容：`.zh-TW.md` 後綴
-
-2. **更多種子配置** — 目標 20+
-   - Claude Code: API 開發、測試工程師、技術寫作
-   - Cursor: Vue/Svelte、Go、Rust
-   - OpenClaw: 單代理聊天、客服
-   - Windsurf: ML、前端
-   - Generic: Git 規範、Code review
-
-3. **配置預覽截圖** — `public/previews/<slug>.png`
-
-### P1 — 短期
-
-4. **shiki 語法高亮**（build-time）
-5. **URL query params** 讓篩選可分享
-6. **Related Configs** 詳情頁推薦相關配置
-7. **貢獻者頁面** `/contributors`
-8. **sitemap.xml** 自動生成
-
-### P2 — 中期
-
-9. **付費整合** LemonSqueezy / Gumroad
-10. **配置版本歷史**
-11. **評分系統**（GitHub Discussions）
-12. **配置產生器**（問答 → 自動生成配置）
-13. **GitHub OAuth 登入**
+### 待做
+- **貢獻者頁面** `/contributors`
+- **LemonSqueezy** 付費 overlay checkout
+- **配置預覽截圖** `public/previews/<slug>.png`
+- **GitHub Discussions** giscus repo-id / category-id 設定（需開啟 Discussions）
+- **OG 圖片** 自動生成
 
 ## 開發規範
 

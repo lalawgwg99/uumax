@@ -11,9 +11,19 @@ price: 19
 purchaseUrl: "#"
 configType: "bundle"
 includes: ["openclaw.json", "agents/", "hooks/"]
-version: "1.0.0"
+version: "1.2.0"
 lastUpdated: "2026-03-22"
 featured: true
+changelog:
+  - version: "1.2.0"
+    date: "2026-03-22"
+    changes: "Added reviewer agent, improved model routing"
+  - version: "1.1.0"
+    date: "2026-03-15"
+    changes: "Added architect agent with tools.profile support"
+  - version: "1.0.0"
+    date: "2026-03-01"
+    changes: "Initial release with frontdesk + engineer"
 ---
 
 ## Overview

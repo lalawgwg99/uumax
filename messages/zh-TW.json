@@ -2,6 +2,7 @@
   "nav": {
     "browse": "瀏覽",
     "submit": "投稿",
+    "generate": "產生器",
     "github": "GitHub"
   },
   "hero": {
@@ -46,7 +47,9 @@
     "copied": "已複製！",
     "download": "下載",
     "purchase": "購買 ${price}",
-    "related": "相關配置"
+    "related": "相關配置",
+    "versionHistory": "版本歷史",
+    "comments": "評論與評分"
   },
   "submit": {
     "title": "投稿配置",
@@ -60,6 +63,21 @@
     "title": "404",
     "message": "這個配置還不存在。",
     "goHome": "回首頁"
+  },
+  "generator": {
+    "title": "配置產生器",
+    "subtitle": "描述你理想的 AI Agent，我們幫你生成可直接使用的配置檔。",
+    "framework": "目標框架",
+    "describe": "描述你的配置需求",
+    "describePlaceholder": "例如：一個 React + TypeScript 全端開發者，遵循 clean architecture，用 Vitest 測試，寫詳細的 commit message...",
+    "generate": "產生配置",
+    "generating": "正在產生你的配置...",
+    "back": "重新開始",
+    "copy": "複製",
+    "copied": "已複製！",
+    "needApiKey": "請先設定 OpenRouter API 金鑰（在任意配置頁點「試用」按鈕）。",
+    "invalidKey": "API 金鑰無效，請透過試用按鈕重新設定。",
+    "backHome": "首頁"
   },
   "tryIt": {
     "button": "試用",

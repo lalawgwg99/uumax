@@ -38,6 +38,7 @@ export interface ConfigMeta {
   lastUpdated: string;
   featured?: boolean;
   previewImage?: string;
+  changelog?: { version: string; date: string; changes: string }[];
 }
 
 export interface ConfigItem extends ConfigMeta {
