@@ -59,5 +59,19 @@
     "title": "404",
     "message": "這個配置還不存在。",
     "goHome": "回首頁"
+  },
+  "tryIt": {
+    "button": "試用",
+    "apiKeyTitle": "輸入你的 OpenRouter API 金鑰",
+    "apiKeyDesc": "金鑰僅儲存在本機，不會傳送到我們的伺服器。",
+    "getKey": "取得免費 API 金鑰",
+    "save": "儲存",
+    "cancel": "取消",
+    "placeholder": "輸入訊息...",
+    "send": "送出",
+    "model": "模型",
+    "changeKey": "更換 API 金鑰",
+    "clearChat": "清除",
+    "thinking": "思考中..."
   }
 }

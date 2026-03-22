@@ -5,6 +5,7 @@ import { Link } from "@/i18n/navigation";
 import { getAllSlugs, getConfigBySlug } from "@/lib/configs";
 import { ConfigContent } from "@/components/configs/ConfigContent";
 import { CopyButton } from "@/components/ui/CopyButton";
+import { TryItButton } from "@/components/chat/TryItButton";
 import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import { ArrowLeft, Download, ExternalLink, Calendar, User } from "lucide-react";
@@ -83,6 +84,7 @@ function ConfigDetailContent({ config }: { config: ConfigItem }) {
       </div>
 
       <div className="flex flex-wrap gap-3 mb-8 p-4 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)]">
+        {mainCode && <TryItButton systemPrompt={mainCode} />}
         {mainCode && <CopyButton text={mainCode} label={t("copyConfig")} />}
         {mainCode && (
           <a

@@ -59,5 +59,19 @@
     "title": "404",
     "message": "This config doesn't exist yet.",
     "goHome": "Go Home"
+  },
+  "tryIt": {
+    "button": "Try it",
+    "apiKeyTitle": "Enter your OpenRouter API key",
+    "apiKeyDesc": "Your key is stored locally and never sent to our servers.",
+    "getKey": "Get a free API key",
+    "save": "Save",
+    "cancel": "Cancel",
+    "placeholder": "Type a message...",
+    "send": "Send",
+    "model": "Model",
+    "changeKey": "Change API key",
+    "clearChat": "Clear",
+    "thinking": "Thinking..."
   }
 }
