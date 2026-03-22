@@ -1,0 +1,23 @@
+{
+  "name": "uumax-mcp",
+  "version": "0.1.0",
+  "description": "MCP server and CLI for uumax AI Agent Config Marketplace",
+  "type": "module",
+  "bin": {
+    "uumax-mcp": "./dist/index.js"
+  },
+  "main": "./dist/index.js",
+  "files": ["dist"],
+  "scripts": {
+    "embed": "node scripts/embed-configs.mjs",
+    "build": "npm run embed && node scripts/bundle.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "esbuild": "^0.25.0"
+  }
+}
