@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { OnboardingBanner } from "@/components/layout/OnboardingBanner";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 
@@ -50,6 +51,7 @@ export default async function LocaleLayout({
     <NextIntlClientProvider locale={locale} messages={messages}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
         <Header />
+        <OnboardingBanner />
         <main className="flex-1">{children}</main>
         <Footer />
       </ThemeProvider>

@@ -5,7 +5,7 @@ import { getFeaturedConfigs, getAllConfigs } from "@/lib/configs";
 import { ConfigCard } from "@/components/configs/ConfigCard";
 import { FRAMEWORK_LABELS } from "@/lib/types";
 import type { Framework } from "@/lib/types";
-import { Zap, Copy, Share2, Layers, ArrowRight } from "lucide-react";
+import { Zap, Copy, Share2, Layers, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 
 const FRAMEWORK_ICONS: Record<Framework, string> = {
   "claude-code": "CC",
@@ -81,6 +81,32 @@ function HomeContent({
             >
               {t("hero.contributeCta")}
             </a>
+          </div>
+        </div>
+      </section>
+
+      {/* What is an AI Agent Config? */}
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="text-2xl font-bold text-center mb-4">
+          {t("whatIs.title")}
+        </h2>
+        <p className="text-center text-[var(--fg-muted)] max-w-2xl mx-auto mb-8">
+          {t("whatIs.description")}
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+          <div className="rounded-xl border border-red-500/20 bg-red-500/5 p-5">
+            <div className="flex items-center gap-2 mb-2">
+              <AlertCircle size={18} className="text-red-500" />
+              <h3 className="font-semibold text-red-500">{t("whatIs.without")}</h3>
+            </div>
+            <p className="text-sm text-[var(--fg-muted)]">{t("whatIs.withoutDesc")}</p>
+          </div>
+          <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-5">
+            <div className="flex items-center gap-2 mb-2">
+              <CheckCircle2 size={18} className="text-emerald-500" />
+              <h3 className="font-semibold text-emerald-500">{t("whatIs.with")}</h3>
+            </div>
+            <p className="text-sm text-[var(--fg-muted)]">{t("whatIs.withDesc")}</p>
           </div>
         </div>
       </section>

@@ -49,7 +49,18 @@
     "purchase": "Purchase ${price}",
     "related": "Related Configs",
     "versionHistory": "Version History",
-    "comments": "Comments & Ratings"
+    "comments": "Comments & Ratings",
+    "howToUse": "How to use this config",
+    "step1Title": "Copy",
+    "step1Desc": "Click the Copy button above to copy the config to your clipboard.",
+    "step2Title": "Paste",
+    "step2claude-code": "Save as CLAUDE.md in your project root.",
+    "step2cursor": "Save as .cursorrules in your project root.",
+    "step2openclaw": "Save as AGENTS.md in your workspace directory.",
+    "step2windsurf": "Save as .windsurfrules in your project root.",
+    "step2generic": "Save as a text file in your project.",
+    "step3Title": "Done",
+    "step3Desc": "The AI agent will now follow the rules defined in this config."
   },
   "submit": {
     "title": "Submit a Config",
@@ -63,6 +74,21 @@
     "title": "404",
     "message": "This config doesn't exist yet.",
     "goHome": "Go Home"
+  },
+  "onboarding": {
+    "title": "First time here?",
+    "description": "uumax is a marketplace for AI agent configuration files — the files that tell tools like Claude Code, Cursor, or Windsurf how to behave.",
+    "step1": "Browse configs for your tool",
+    "step2": "Copy or download the config",
+    "step3": "Paste it into your project"
+  },
+  "whatIs": {
+    "title": "What is an AI Agent Config?",
+    "description": "AI coding tools like Claude Code, Cursor, and Windsurf use configuration files (CLAUDE.md, .cursorrules, etc.) to understand your coding style, project rules, and workflow. A good config turns a generic AI into your personal senior developer.",
+    "without": "Without config",
+    "withoutDesc": "Generic responses, no context about your project, repeated mistakes",
+    "with": "With config",
+    "withDesc": "Knows your stack, follows your conventions, writes code your way"
   },
   "contributors": {
     "title": "Contributors",

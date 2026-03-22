@@ -125,6 +125,34 @@ function ConfigDetailContent({ config, related }: { config: ConfigItem; related:
         ))}
       </div>
 
+      {/* How to use - beginner guide */}
+      <div className="mb-8 p-4 rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)]">
+        <h3 className="font-semibold mb-3">{t("howToUse")}</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
+          <div className="flex gap-2">
+            <span className="w-6 h-6 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)] flex items-center justify-center text-xs font-bold shrink-0">1</span>
+            <div>
+              <p className="font-medium">{t("step1Title")}</p>
+              <p className="text-[var(--fg-muted)]">{t("step1Desc")}</p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <span className="w-6 h-6 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)] flex items-center justify-center text-xs font-bold shrink-0">2</span>
+            <div>
+              <p className="font-medium">{t("step2Title")}</p>
+              <p className="text-[var(--fg-muted)]">{t(`step2${config.framework}`)}</p>
+            </div>
+          </div>
+          <div className="flex gap-2">
+            <span className="w-6 h-6 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)] flex items-center justify-center text-xs font-bold shrink-0">3</span>
+            <div>
+              <p className="font-medium">{t("step3Title")}</p>
+              <p className="text-[var(--fg-muted)]">{t("step3Desc")}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <ConfigContent content={config.content} />
 
       {/* Version History */}

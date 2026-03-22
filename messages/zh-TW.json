@@ -49,7 +49,18 @@
     "purchase": "購買 ${price}",
     "related": "相關配置",
     "versionHistory": "版本歷史",
-    "comments": "評論與評分"
+    "comments": "評論與評分",
+    "howToUse": "怎麼使用這個配置",
+    "step1Title": "複製",
+    "step1Desc": "點擊上方的「複製」按鈕，將配置複製到剪貼簿。",
+    "step2Title": "貼上",
+    "step2claude-code": "存為專案根目錄的 CLAUDE.md。",
+    "step2cursor": "存為專案根目錄的 .cursorrules。",
+    "step2openclaw": "存為工作區目錄的 AGENTS.md。",
+    "step2windsurf": "存為專案根目錄的 .windsurfrules。",
+    "step2generic": "存為專案中的文字檔。",
+    "step3Title": "完成",
+    "step3Desc": "AI Agent 現在會遵循這個配置中定義的規則。"
   },
   "submit": {
     "title": "投稿配置",
@@ -63,6 +74,21 @@
     "title": "404",
     "message": "這個配置還不存在。",
     "goHome": "回首頁"
+  },
+  "onboarding": {
+    "title": "第一次來？",
+    "description": "uumax 是 AI Agent 配置檔的市集 — 這些檔案告訴 Claude Code、Cursor、Windsurf 等工具該怎麼運作。",
+    "step1": "瀏覽適合你工具的配置",
+    "step2": "複製或下載配置檔",
+    "step3": "貼到你的專案裡"
+  },
+  "whatIs": {
+    "title": "什麼是 AI Agent 配置？",
+    "description": "Claude Code、Cursor、Windsurf 等 AI 程式工具透過配置檔（CLAUDE.md、.cursorrules 等）來了解你的程式風格、專案規範和工作流程。好的配置讓通用 AI 變成你的專屬資深工程師。",
+    "without": "沒有配置",
+    "withoutDesc": "回答很通用，不了解你的專案，反覆犯同樣的錯",
+    "with": "有配置",
+    "withDesc": "熟悉你的技術棧，遵守你的規範，按你的方式寫程式"
   },
   "contributors": {
     "title": "貢獻者",
