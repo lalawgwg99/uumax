@@ -63,6 +63,24 @@ export function getAllSlugs(): string[] {
   return getAllConfigs().map((c) => c.slug);
 }
 
+export function getRelatedConfigs(slug: string, limit = 3): ConfigMeta[] {
+  const current = getAllConfigs().find((c) => c.slug === slug);
+  if (!current) return [];
+  const others = getAllConfigs().filter((c) => c.slug !== slug);
+  const scored = others.map((c) => {
+    let score = 0;
+    if (c.framework === current.framework) score += 3;
+    score += c.useCases.filter((uc) => current.useCases.includes(uc)).length * 2;
+    score += c.tags.filter((t) => current.tags.includes(t)).length;
+    return { config: c, score };
+  });
+  return scored
+    .sort((a, b) => b.score - a.score)
+    .slice(0, limit)
+    .filter((s) => s.score > 0)
+    .map((s) => s.config);
+}
+
 export function getAllTags(): string[] {
   const tags = new Set<string>();
   for (const c of getAllConfigs()) {

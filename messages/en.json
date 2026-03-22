@@ -45,7 +45,8 @@
     "copyConfig": "Copy Config",
     "copied": "Copied!",
     "download": "Download",
-    "purchase": "Purchase ${price}"
+    "purchase": "Purchase ${price}",
+    "related": "Related Configs"
   },
   "submit": {
     "title": "Submit a Config",

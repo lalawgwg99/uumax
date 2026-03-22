@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { getAllSlugs, getConfigBySlug } from "@/lib/configs";
+import { getAllSlugs, getConfigBySlug, getRelatedConfigs } from "@/lib/configs";
+import { ConfigCard } from "@/components/configs/ConfigCard";
 import { ConfigContent } from "@/components/configs/ConfigContent";
 import { CopyButton } from "@/components/ui/CopyButton";
 import { TryItButton } from "@/components/chat/TryItButton";
@@ -36,10 +37,13 @@ export default async function ConfigDetailPage({ params }: PageProps) {
   setRequestLocale(locale);
   const config = getConfigBySlug(slug);
   if (!config) notFound();
-  return <ConfigDetailContent config={config} />;
+  const related = getRelatedConfigs(slug);
+  return <ConfigDetailContent config={config} related={related} />;
 }
 
-function ConfigDetailContent({ config }: { config: ConfigItem }) {
+import type { ConfigMeta } from "@/lib/types";
+
+function ConfigDetailContent({ config, related }: { config: ConfigItem; related: ConfigMeta[] }) {
   const t = useTranslations("configs");
   const codeMatch = config.content.match(/```[\w]*\n([\s\S]*?)```/);
   const mainCode = codeMatch ? codeMatch[1].trim() : "";
@@ -116,6 +120,17 @@ function ConfigDetailContent({ config }: { config: ConfigItem }) {
       </div>
 
       <ConfigContent content={config.content} />
+
+      {related.length > 0 && (
+        <div className="mt-12 pt-8 border-t border-[var(--border)]">
+          <h2 className="text-xl font-bold mb-4">{t("related")}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {related.map((r) => (
+              <ConfigCard key={r.slug} config={r} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

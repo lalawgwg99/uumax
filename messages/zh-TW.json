@@ -45,7 +45,8 @@
     "copyConfig": "複製配置",
     "copied": "已複製！",
     "download": "下載",
-    "purchase": "購買 ${price}"
+    "purchase": "購買 ${price}",
+    "related": "相關配置"
   },
   "submit": {
     "title": "投稿配置",

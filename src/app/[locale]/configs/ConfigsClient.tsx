@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import type { ConfigMeta, Framework, UseCase } from "@/lib/types";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
@@ -32,6 +32,48 @@ export function ConfigsClient({ configs }: Props) {
   const [useCase, setUseCase] = useState<string>("");
   const [search, setSearch] = useState("");
 
+  // Read URL params on mount
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fw = params.get("framework");
+    const uc = params.get("useCase");
+    const q = params.get("q");
+    if (fw) setFramework(fw);
+    if (uc) setUseCase(uc);
+    if (q) setSearch(q);
+  }, []);
+
+  // Sync state to URL
+  const syncUrl = useCallback(
+    (fw: string, uc: string, q: string) => {
+      const params = new URLSearchParams();
+      if (fw) params.set("framework", fw);
+      if (uc) params.set("useCase", uc);
+      if (q) params.set("q", q);
+      const qs = params.toString();
+      const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+      window.history.replaceState(null, "", url);
+    },
+    []
+  );
+
+  const handleFramework = (fw: string) => {
+    const next = framework === fw ? "" : fw;
+    setFramework(next);
+    syncUrl(next, useCase, search);
+  };
+
+  const handleUseCase = (uc: string) => {
+    const next = useCase === uc ? "" : uc;
+    setUseCase(next);
+    syncUrl(framework, next, search);
+  };
+
+  const handleSearch = (q: string) => {
+    setSearch(q);
+    syncUrl(framework, useCase, q);
+  };
+
   let filtered = configs;
   if (framework) {
     filtered = filtered.filter((c) => c.framework === framework);
@@ -60,7 +102,7 @@ export function ConfigsClient({ configs }: Props) {
         type="text"
         placeholder={t("search")}
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => handleSearch(e.target.value)}
         className="w-full max-w-md mb-6 px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--fg-muted)] focus:outline-none focus:border-[var(--color-brand)]"
       />
 
@@ -72,7 +114,7 @@ export function ConfigsClient({ configs }: Props) {
           {FRAMEWORKS.map((fw) => (
             <button
               key={fw}
-              onClick={() => setFramework(framework === fw ? "" : fw)}
+              onClick={() => handleFramework(fw)}
               className={`px-3 py-1 text-sm rounded-lg border transition-colors ${
                 framework === fw
                   ? "border-[var(--color-brand)] bg-[var(--color-brand)]/10 text-[var(--color-brand)]"
@@ -90,7 +132,7 @@ export function ConfigsClient({ configs }: Props) {
           {USE_CASES.map((uc) => (
             <button
               key={uc}
-              onClick={() => setUseCase(useCase === uc ? "" : uc)}
+              onClick={() => handleUseCase(uc)}
               className={`px-3 py-1 text-sm rounded-lg border transition-colors ${
                 useCase === uc
                   ? "border-[var(--color-brand)] bg-[var(--color-brand)]/10 text-[var(--color-brand)]"

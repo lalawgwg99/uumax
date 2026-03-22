@@ -1,10 +1,11 @@
+import { codeToHtml } from "shiki";
+
 interface ConfigContentProps {
   content: string;
 }
 
-export function ConfigContent({ content }: ConfigContentProps) {
-  // Simple markdown-to-HTML for static export (no MDX runtime needed)
-  const html = markdownToHtml(content);
+export async function ConfigContent({ content }: ConfigContentProps) {
+  const html = await markdownToHtml(content);
   return (
     <div
       className="prose max-w-none"
@@ -13,23 +14,38 @@ export function ConfigContent({ content }: ConfigContentProps) {
   );
 }
 
-function markdownToHtml(md: string): string {
+async function markdownToHtml(md: string): Promise<string> {
   let html = md;
 
-  // Code blocks (```lang ... ```)
-  html = html.replace(
-    /```(\w*)\n([\s\S]*?)```/g,
-    (_match, lang, code) => {
-      const escaped = escapeHtml(code.trimEnd());
-      return `<pre><code class="language-${lang || "text"}">${escaped}</code></pre>`;
+  // Highlight code blocks with shiki
+  const codeBlocks: { placeholder: string; html: string }[] = [];
+  const codeBlockRegex = /```(\w*)\n([\s\S]*?)```/g;
+  let match;
+  let index = 0;
+
+  while ((match = codeBlockRegex.exec(md)) !== null) {
+    const lang = match[1] || "text";
+    const code = match[2].trimEnd();
+    const placeholder = `__CODE_BLOCK_${index}__`;
+
+    let highlighted: string;
+    try {
+      highlighted = await codeToHtml(code, {
+        lang,
+        themes: { light: "github-light", dark: "github-dark" },
+      });
+    } catch {
+      // Fallback for unsupported languages
+      highlighted = `<pre><code class="language-${lang}">${escapeHtml(code)}</code></pre>`;
     }
-  );
+
+    codeBlocks.push({ placeholder, html: highlighted });
+    html = html.replace(match[0], placeholder);
+    index++;
+  }
 
   // Inline code
-  html = html.replace(
-    /`([^`]+)`/g,
-    "<code>$1</code>"
-  );
+  html = html.replace(/`([^`]+)`/g, "<code>$1</code>");
 
   // Headers
   html = html.replace(/^### (.+)$/gm, "<h3>$1</h3>");
@@ -45,7 +61,7 @@ function markdownToHtml(md: string): string {
   // Ordered lists
   html = html.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
 
-  // Paragraphs (lines that aren't already wrapped)
+  // Paragraphs
   html = html
     .split("\n\n")
     .map((block) => {
@@ -56,13 +72,19 @@ function markdownToHtml(md: string): string {
         trimmed.startsWith("<pre") ||
         trimmed.startsWith("<ul") ||
         trimmed.startsWith("<ol") ||
-        trimmed.startsWith("<li")
+        trimmed.startsWith("<li") ||
+        trimmed.startsWith("__CODE_BLOCK_")
       ) {
         return trimmed;
       }
       return `<p>${trimmed.replace(/\n/g, "<br/>")}</p>`;
     })
     .join("\n");
+
+  // Restore code blocks
+  for (const block of codeBlocks) {
+    html = html.replace(block.placeholder, block.html);
+  }
 
   return html;
 }

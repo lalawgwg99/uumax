@@ -75,13 +75,25 @@ body {
 }
 
 .prose pre {
-  background: var(--code-bg);
   border-radius: 0.5rem;
   padding: 1rem;
   overflow-x: auto;
   margin-bottom: 1.5rem;
   font-size: 0.875rem;
   line-height: 1.6;
+}
+
+/* Shiki dual theme support */
+.prose .shiki,
+.prose .shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark .prose .shiki,
+.dark .prose .shiki span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
 }
 
 .prose code {
