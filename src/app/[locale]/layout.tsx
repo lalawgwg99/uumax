@@ -14,6 +14,15 @@ export const metadata: Metadata = {
   },
   description:
     "Discover, share, and sell production-ready configurations for AI coding agents.",
+  openGraph: {
+    type: "website",
+    siteName: "uumax",
+    images: [{ url: "/og/default.svg", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/og/default.svg"],
+  },
 };
 
 export function generateStaticParams() {

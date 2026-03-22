@@ -10,6 +10,7 @@ import { TryItButton } from "@/components/chat/TryItButton";
 import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import { Giscus } from "@/components/configs/Giscus";
+import { LemonSqueezyButton } from "@/components/configs/LemonSqueezyButton";
 import { ArrowLeft, Download, ExternalLink, Calendar, User, History } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
@@ -30,7 +31,16 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const config = getConfigBySlug(slug);
   if (!config) return {};
-  return { title: config.title, description: config.description };
+  return {
+    title: config.title,
+    description: config.description,
+    openGraph: {
+      title: config.title,
+      description: config.description,
+      images: [{ url: `/og/${slug}.svg`, width: 1200, height: 630 }],
+    },
+    twitter: { card: "summary_large_image", images: [`/og/${slug}.svg`] },
+  };
 }
 
 export default async function ConfigDetailPage({ params }: PageProps) {
@@ -102,15 +112,10 @@ function ConfigDetailContent({ config, related }: { config: ConfigItem; related:
           </a>
         )}
         {config.pricing === "premium" && config.purchaseUrl && (
-          <a
-            href={config.purchaseUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-4 py-1.5 text-sm rounded-lg bg-[var(--color-brand)] text-white hover:bg-[var(--color-brand-dark)] transition-colors"
-          >
-            <ExternalLink size={14} />
-            {t("purchase", { price: config.price ?? 0 })}
-          </a>
+          <LemonSqueezyButton
+            purchaseUrl={config.purchaseUrl}
+            label={t("purchase", { price: config.price ?? 0 })}
+          />
         )}
       </div>
 

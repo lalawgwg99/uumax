@@ -64,6 +64,12 @@
     "message": "這個配置還不存在。",
     "goHome": "回首頁"
   },
+  "contributors": {
+    "title": "貢獻者",
+    "subtitle": "配置背後的人。想加入？透過 GitHub PR 投稿你的配置。",
+    "backHome": "首頁",
+    "configCount": "{count} 個配置"
+  },
   "generator": {
     "title": "配置產生器",
     "subtitle": "描述你理想的 AI Agent，我們幫你生成可直接使用的配置檔。",

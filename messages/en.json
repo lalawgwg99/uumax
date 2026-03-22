@@ -64,6 +64,12 @@
     "message": "This config doesn't exist yet.",
     "goHome": "Go Home"
   },
+  "contributors": {
+    "title": "Contributors",
+    "subtitle": "The people behind the configs. Want to join? Submit your config via GitHub PR.",
+    "backHome": "Home",
+    "configCount": "{count, plural, one {# config} other {# configs}}"
+  },
   "generator": {
     "title": "Config Generator",
     "subtitle": "Describe your ideal AI agent and we'll generate a production-ready config for you.",

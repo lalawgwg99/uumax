@@ -27,6 +27,7 @@ function generateSitemap() {
   for (const locale of LOCALES) {
     pages.push({ url: `/${locale}`, priority: "1.0", changefreq: "weekly" });
     pages.push({ url: `/${locale}/configs`, priority: "0.9", changefreq: "daily" });
+    pages.push({ url: `/${locale}/contributors`, priority: "0.6", changefreq: "weekly" });
     pages.push({ url: `/${locale}/generate`, priority: "0.7", changefreq: "monthly" });
     pages.push({ url: `/${locale}/submit`, priority: "0.5", changefreq: "monthly" });
     for (const slug of slugs) {

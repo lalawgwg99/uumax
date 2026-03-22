@@ -1,0 +1,11 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0b0d11"/>
+  <rect x="0" y="0" width="1200" height="6" fill="#3b82f6"/>
+  <text x="80" y="120" font-family="system-ui, sans-serif" font-size="24" fill="#9ca3af">uumax · AI Agent Config Marketplace</text>
+  <text x="80" y="260" font-family="system-ui, sans-serif" font-size="56" font-weight="bold" fill="#f3f4f6">Frontend React</text>
+  <text x="80" y="340" font-family="system-ui, sans-serif" font-size="28" fill="#9ca3af">Windsurf rules for React frontend development with TypeScript, Vite, and mode...</text>
+  <rect x="80" y="400" width="140" height="40" rx="8" fill="#3b82f6" opacity="0.2"/>
+  <text x="150" y="427" font-family="system-ui, sans-serif" font-size="20" fill="#3b82f6" text-anchor="middle">windsurf</text>
+  <text x="80" y="520" font-family="system-ui, monospace" font-size="20" fill="#6b7280">react  ·  typescript  ·  vite  ·  tanstack</text>
+  <text x="1120" y="580" font-family="system-ui, sans-serif" font-size="20" fill="#4b5563" text-anchor="end">uumax.pages.dev</text>
+</svg>
