@@ -17,7 +17,7 @@ export const FREE_MODELS: ModelOption[] = [
 ];
 
 // Public free tier: limited daily uses with a shared key
-const PUBLIC_KEY = "sk-or-v1-free-tier-uumax";
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_OPENROUTER_FREE_KEY || "";
 const DAILY_LIMIT = 5;
 const USAGE_KEY = "uumax-free-usage";
 
@@ -57,6 +57,8 @@ export function getFreeTierRemaining(): number {
 export function getApiKey(): { key: string; isFreeTier: boolean } | null {
   const userKey = localStorage.getItem("openrouter-api-key");
   if (userKey) return { key: userKey, isFreeTier: false };
+
+  if (!PUBLIC_KEY) return null;
 
   const remaining = getFreeTierRemaining();
   if (remaining > 0) return { key: PUBLIC_KEY, isFreeTier: true };
