@@ -31,6 +31,9 @@
     "title": "支援的框架",
     "configs": "{count} 個配置"
   },
+  "useCases": {
+    "title": "依場景瀏覽"
+  },
   "cta": {
     "title": "有很讚的 Agent 配置？",
     "description": "分享給社群，或作為付費配置上架。你的專業、你的規則、你的收入。",
@@ -42,6 +45,11 @@
     "search": "搜尋配置...",
     "framework": "框架：",
     "useCase": "場景：",
+    "pricing": "價格：",
+    "sortLatest": "最新",
+    "sortAZ": "A \u2192 Z",
+    "priceFree": "免費",
+    "pricePremium": "付費",
     "empty": "沒有符合條件的配置，試試調整篩選。",
     "backToConfigs": "返回配置列表",
     "copyConfig": "複製配置",

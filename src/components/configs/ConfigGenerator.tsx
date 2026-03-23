@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { Wand2, Copy, Check, ChevronRight } from "lucide-react";
-import { FREE_MODELS, streamChat } from "@/lib/openrouter";
+import { FREE_MODELS, streamChat, getApiKey, consumeFreeTier } from "@/lib/openrouter";
 import type { Framework } from "@/lib/types";
 import { FRAMEWORK_LABELS } from "@/lib/types";
 
@@ -20,10 +20,6 @@ Output format:
 
 Always respond in the same language the user writes in.`;
 
-interface Step {
-  id: string;
-  value: string;
-}
 
 export function ConfigGenerator() {
   const t = useTranslations("generator");
@@ -36,8 +32,8 @@ export function ConfigGenerator() {
   const [step, setStep] = useState<"input" | "result">("input");
 
   const handleGenerate = useCallback(async () => {
-    const apiKey = localStorage.getItem("openrouter-api-key");
-    if (!apiKey) {
+    const auth = getApiKey();
+    if (!auth) {
       setError(t("needApiKey"));
       return;
     }
@@ -55,7 +51,7 @@ Config file format: ${framework === "claude-code" ? "CLAUDE.md" : framework === 
 
     try {
       const model = localStorage.getItem("openrouter-model") || FREE_MODELS[0].id;
-      const stream = streamChat(apiKey, model, GENERATOR_SYSTEM_PROMPT, [
+      const stream = streamChat(auth.key, model, GENERATOR_SYSTEM_PROMPT, [
         { role: "user", content: prompt },
       ]);
       let full = "";
@@ -63,6 +59,7 @@ Config file format: ${framework === "claude-code" ? "CLAUDE.md" : framework === 
         full += chunk;
         setResult(full);
       }
+      if (auth.isFreeTier) consumeFreeTier();
     } catch (e: unknown) {
       if (e instanceof Error && e.message === "INVALID_KEY") {
         localStorage.removeItem("openrouter-api-key");

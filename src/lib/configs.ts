@@ -76,8 +76,8 @@ export function getRelatedConfigs(slug: string, limit = 3): ConfigMeta[] {
   });
   return scored
     .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
     .filter((s) => s.score > 0)
+    .slice(0, limit)
     .map((s) => s.config);
 }
 

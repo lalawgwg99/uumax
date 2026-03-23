@@ -31,6 +31,9 @@
     "title": "Supported Frameworks",
     "configs": "{count} configs"
   },
+  "useCases": {
+    "title": "Browse by Use Case"
+  },
   "cta": {
     "title": "Got a killer agent config?",
     "description": "Share it with the community or sell it as a premium config. Your expertise, your rules, your revenue.",
@@ -42,6 +45,11 @@
     "search": "Search configs...",
     "framework": "Framework:",
     "useCase": "Use Case:",
+    "pricing": "Pricing:",
+    "sortLatest": "Latest",
+    "sortAZ": "A \u2192 Z",
+    "priceFree": "Free",
+    "pricePremium": "Premium",
     "empty": "No configs match your filters. Try adjusting them.",
     "backToConfigs": "Back to configs",
     "copyConfig": "Copy Config",

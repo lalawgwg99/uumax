@@ -90,7 +90,7 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
       setIsStreaming(false);
       abortRef.current = null;
     }
-  }, [input, isStreaming, messages, systemPrompt, t]);
+  }, [input, isStreaming, messages, systemPrompt]);
 
   if (!open) {
     return (
@@ -105,7 +105,7 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 w-[360px] h-[500px] rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl flex flex-col overflow-hidden">
+    <div className="fixed bottom-6 right-6 z-50 w-[calc(100vw-3rem)] max-w-[360px] h-[500px] rounded-2xl border border-[var(--border)] bg-[var(--bg)] shadow-2xl flex flex-col overflow-hidden">
       {/* Header */}
       <div className="flex items-center gap-2 px-4 py-3 border-b border-[var(--border)] bg-[var(--color-brand)] text-white">
         <Sparkles size={18} />
@@ -214,7 +214,12 @@ function renderLinks(text: string): string {
     .replace(/>/g, "&gt;")
     .replace(
       /\[([^\]]+)\]\(([^)]+)\)/g,
-      '<a href="$2" class="text-[var(--color-brand)] underline hover:no-underline">$1</a>'
+      (_, label, url) => {
+        if (url.startsWith("/") || url.startsWith("https://")) {
+          return `<a href="${url}" class="text-[var(--color-brand)] underline hover:no-underline">${label}</a>`;
+        }
+        return label;
+      }
     )
     .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
     .replace(/\n/g, "<br/>");

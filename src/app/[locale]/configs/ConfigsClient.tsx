@@ -18,6 +18,7 @@ const USE_CASES: UseCase[] = [
   "fullstack",
   "devops",
   "data",
+  "mobile",
   "writing",
   "security",
 ];
@@ -31,6 +32,8 @@ export function ConfigsClient({ configs }: Props) {
   const [framework, setFramework] = useState<string>("");
   const [useCase, setUseCase] = useState<string>("");
   const [search, setSearch] = useState("");
+  const [pricing, setPricing] = useState<string>("");
+  const [sort, setSort] = useState<string>("latest");
 
   // Read URL params on mount
   useEffect(() => {
@@ -38,18 +41,24 @@ export function ConfigsClient({ configs }: Props) {
     const fw = params.get("framework");
     const uc = params.get("useCase");
     const q = params.get("q");
+    const p = params.get("pricing");
+    const s = params.get("sort");
     if (fw) setFramework(fw);
     if (uc) setUseCase(uc);
     if (q) setSearch(q);
+    if (p) setPricing(p);
+    if (s) setSort(s);
   }, []);
 
   // Sync state to URL
   const syncUrl = useCallback(
-    (fw: string, uc: string, q: string) => {
+    (fw: string, uc: string, q: string, p?: string, s?: string) => {
       const params = new URLSearchParams();
       if (fw) params.set("framework", fw);
       if (uc) params.set("useCase", uc);
       if (q) params.set("q", q);
+      if (p) params.set("pricing", p);
+      if (s && s !== "latest") params.set("sort", s);
       const qs = params.toString();
       const url = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
       window.history.replaceState(null, "", url);
@@ -60,18 +69,18 @@ export function ConfigsClient({ configs }: Props) {
   const handleFramework = (fw: string) => {
     const next = framework === fw ? "" : fw;
     setFramework(next);
-    syncUrl(next, useCase, search);
+    syncUrl(next, useCase, search, pricing, sort);
   };
 
   const handleUseCase = (uc: string) => {
     const next = useCase === uc ? "" : uc;
     setUseCase(next);
-    syncUrl(framework, next, search);
+    syncUrl(framework, next, search, pricing, sort);
   };
 
   const handleSearch = (q: string) => {
     setSearch(q);
-    syncUrl(framework, useCase, q);
+    syncUrl(framework, useCase, q, pricing, sort);
   };
 
   let filtered = configs;
@@ -90,6 +99,12 @@ export function ConfigsClient({ configs }: Props) {
         c.tags.some((t) => t.toLowerCase().includes(q))
     );
   }
+  if (pricing) {
+    filtered = filtered.filter((c) => c.pricing === pricing);
+  }
+  if (sort === "az") {
+    filtered = [...filtered].sort((a, b) => a.title.localeCompare(b.title));
+  }
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-10">
@@ -98,13 +113,26 @@ export function ConfigsClient({ configs }: Props) {
         {t("count", { count: filtered.length })}
       </p>
 
-      <input
-        type="text"
-        placeholder={t("search")}
-        value={search}
-        onChange={(e) => handleSearch(e.target.value)}
-        className="w-full max-w-md mb-6 px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--fg-muted)] focus:outline-none focus:border-[var(--color-brand)]"
-      />
+      <div className="flex gap-3 mb-6">
+        <input
+          type="text"
+          placeholder={t("search")}
+          value={search}
+          onChange={(e) => handleSearch(e.target.value)}
+          className="w-full max-w-md px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--bg)] text-[var(--fg)] placeholder:text-[var(--fg-muted)] focus:outline-none focus:border-[var(--color-brand)]"
+        />
+        <select
+          value={sort}
+          onChange={(e) => {
+            setSort(e.target.value);
+            syncUrl(framework, useCase, search, pricing, e.target.value);
+          }}
+          className="rounded-lg border border-[var(--border)] bg-[var(--bg)] px-3 py-2 text-sm text-[var(--fg)] outline-none focus:border-[var(--color-brand)]"
+        >
+          <option value="latest">{t("sortLatest")}</option>
+          <option value="az">{t("sortAZ")}</option>
+        </select>
+      </div>
 
       <div className="space-y-3 mb-8">
         <div className="flex flex-wrap gap-2">
@@ -140,6 +168,28 @@ export function ConfigsClient({ configs }: Props) {
               }`}
             >
               {USECASE_LABELS[uc]}
+            </button>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          <span className="text-xs font-medium text-[var(--fg-muted)] self-center mr-1">
+            {t("pricing")}
+          </span>
+          {["free", "premium"].map((p) => (
+            <button
+              key={p}
+              onClick={() => {
+                const next = pricing === p ? "" : p;
+                setPricing(next);
+                syncUrl(framework, useCase, search, next, sort);
+              }}
+              className={`px-3 py-1 text-sm rounded-lg border transition-colors ${
+                pricing === p
+                  ? "border-[var(--color-brand)] bg-[var(--color-brand)]/10 text-[var(--color-brand)]"
+                  : "border-[var(--border)] text-[var(--fg-muted)] hover:border-[var(--fg-muted)]"
+              }`}
+            >
+              {p === "free" ? t("priceFree") : t("pricePremium")}
             </button>
           ))}
         </div>

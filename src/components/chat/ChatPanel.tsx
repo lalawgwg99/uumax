@@ -59,7 +59,14 @@ export function ChatPanel({ open, onClose, systemPrompt }: ChatPanelProps) {
   };
 
   const handleSend = useCallback(async () => {
-    if (!input.trim() || !apiKey || isStreaming) return;
+    if (!input.trim() || isStreaming) return;
+
+    // Re-check auth at send time (free tier may have been exhausted)
+    const auth = getApiKey();
+    if (!auth) {
+      setShowKeyDialog(true);
+      return;
+    }
 
     const userMsg: ChatMessage = { role: "user", content: input.trim() };
     const updated = [...messages, userMsg];
@@ -75,15 +82,13 @@ export function ChatPanel({ open, onClose, systemPrompt }: ChatPanelProps) {
     abortRef.current = abort;
 
     try {
-      const stream = streamChat(apiKey, model, systemPrompt, updated, abort.signal);
+      const stream = streamChat(auth.key, model, systemPrompt, updated, abort.signal);
       let full = "";
       for await (const chunk of stream) {
         full += chunk;
         setMessages([...updated, { role: "assistant", content: full }]);
       }
-      // Consume free tier usage if applicable
-      const auth = getApiKey();
-      if (auth?.isFreeTier) consumeFreeTier();
+      if (auth.isFreeTier) consumeFreeTier();
     } catch (e: unknown) {
       if (e instanceof Error && e.name === "AbortError") return;
       if (e instanceof Error && e.message === "INVALID_KEY") {
@@ -98,7 +103,7 @@ export function ChatPanel({ open, onClose, systemPrompt }: ChatPanelProps) {
       setIsStreaming(false);
       abortRef.current = null;
     }
-  }, [input, apiKey, isStreaming, messages, model, systemPrompt]);
+  }, [input, isStreaming, messages, model, systemPrompt]);
 
   const handleClose = () => {
     abortRef.current?.abort();
@@ -192,11 +197,11 @@ export function ChatPanel({ open, onClose, systemPrompt }: ChatPanelProps) {
               placeholder={t("placeholder")}
               rows={1}
               className="flex-1 resize-none rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-3 py-2 text-sm outline-none focus:border-[var(--color-brand)]"
-              disabled={isStreaming || !apiKey}
+              disabled={isStreaming}
             />
             <button
               onClick={handleSend}
-              disabled={isStreaming || !input.trim() || !apiKey}
+              disabled={isStreaming || !input.trim()}
               className="rounded-lg bg-[var(--color-brand)] px-3 py-2 text-white hover:bg-[var(--color-brand-dark)] transition-colors disabled:opacity-50"
             >
               <Send size={16} />

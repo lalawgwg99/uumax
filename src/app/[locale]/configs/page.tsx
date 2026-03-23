@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Browse Configs",
+  description: "Browse production-ready AI agent configurations for Claude Code, Cursor, OpenClaw, Windsurf, and more.",
 };
 
 export default async function ConfigsPage({

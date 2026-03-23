@@ -9,7 +9,10 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = { title: "AI Tools" };
+export const metadata: Metadata = {
+  title: "AI Tools",
+  description: "Free AI-powered tools to analyze, compare, and remix your AI agent configurations.",
+};
 
 export default async function ToolsPage({
   params,

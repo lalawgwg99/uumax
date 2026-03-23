@@ -54,12 +54,30 @@ async function markdownToHtml(md: string): Promise<string> {
   // Bold
   html = html.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
 
-  // Unordered lists
-  html = html.replace(/^- (.+)$/gm, "<li>$1</li>");
-  html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, "<ul>$1</ul>");
+  // Links [text](url)
+  html = html.replace(
+    /\[([^\]]+)\]\(([^)]+)\)/g,
+    (_, label, url) => {
+      if (url.startsWith("/") || url.startsWith("https://") || url.startsWith("http://")) {
+        return `<a href="${url}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      }
+      return label;
+    }
+  );
+
+  // Unordered lists — mark with __UL__ to distinguish from ordered
+  html = html.replace(/^- (.+)$/gm, "__UL_ITEM__$1__/UL_ITEM__");
+  html = html.replace(/((?:__UL_ITEM__.*__\/UL_ITEM__\n?)+)/g, (match) => {
+    const items = match.replace(/__UL_ITEM__(.*?)__\/UL_ITEM__/g, "<li>$1</li>");
+    return `<ul>${items}</ul>`;
+  });
 
   // Ordered lists
-  html = html.replace(/^\d+\. (.+)$/gm, "<li>$1</li>");
+  html = html.replace(/^\d+\. (.+)$/gm, "__OL_ITEM__$1__/OL_ITEM__");
+  html = html.replace(/((?:__OL_ITEM__.*__\/OL_ITEM__\n?)+)/g, (match) => {
+    const items = match.replace(/__OL_ITEM__(.*?)__\/OL_ITEM__/g, "<li>$1</li>");
+    return `<ol>${items}</ol>`;
+  });
 
   // Paragraphs
   html = html

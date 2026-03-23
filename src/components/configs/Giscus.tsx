@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
+import { useLocale } from "next-intl";
 
 interface GiscusProps {
   slug: string;
@@ -10,6 +11,7 @@ interface GiscusProps {
 export function Giscus({ slug }: GiscusProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { resolvedTheme } = useTheme();
+  const locale = useLocale();
 
   useEffect(() => {
     if (!ref.current) return;
@@ -30,12 +32,12 @@ export function Giscus({ slug }: GiscusProps) {
     script.setAttribute("data-emit-metadata", "0");
     script.setAttribute("data-input-position", "top");
     script.setAttribute("data-theme", resolvedTheme === "dark" ? "dark" : "light");
-    script.setAttribute("data-lang", "en");
+    script.setAttribute("data-lang", locale === "zh-TW" ? "zh-TW" : "en");
     script.setAttribute("crossorigin", "anonymous");
     script.async = true;
 
     ref.current.appendChild(script);
-  }, [slug, resolvedTheme]);
+  }, [slug, resolvedTheme, locale]);
 
   return <div ref={ref} className="mt-8" />;
 }

@@ -3,8 +3,8 @@ import { setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getFeaturedConfigs, getAllConfigs } from "@/lib/configs";
 import { ConfigCard } from "@/components/configs/ConfigCard";
-import { FRAMEWORK_LABELS } from "@/lib/types";
-import type { Framework } from "@/lib/types";
+import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
+import type { Framework, UseCase } from "@/lib/types";
 import { Zap, Copy, Share2, Layers, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
 
 const FRAMEWORK_ICONS: Record<Framework, string> = {
@@ -191,6 +191,26 @@ function HomeContent({
                 </span>
               </Link>
             ))}
+        </div>
+      </section>
+
+      {/* Use Cases */}
+      <section className="max-w-6xl mx-auto px-4 py-16">
+        <h2 className="text-2xl font-bold text-center mb-10">
+          {t("useCases.title")}
+        </h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          {(Object.entries(USECASE_LABELS) as [UseCase, string][]).map(
+            ([uc, label]) => (
+              <Link
+                key={uc}
+                href={`/configs?useCase=${uc}`}
+                className="px-4 py-2 rounded-lg border border-[var(--border)] bg-[var(--card-bg)] hover:border-[var(--color-brand)]/40 hover:bg-[var(--color-brand)]/5 transition-all text-sm font-medium"
+              >
+                {label}
+              </Link>
+            )
+          )}
         </div>
       </section>
 

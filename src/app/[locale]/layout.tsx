@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   },
   description:
     "Discover, share, and sell production-ready configurations for AI coding agents.",
+  keywords: ["AI agent config", "CLAUDE.md", "cursorrules", "Claude Code", "Cursor", "OpenClaw", "Windsurf", "AI coding", "agent configuration"],
   openGraph: {
     type: "website",
     siteName: "uumax",
@@ -39,6 +40,12 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     images: [`${SITE_URL}/og/default.svg`],
+  },
+  alternates: {
+    languages: {
+      'en': `${SITE_URL}/en`,
+      'zh-TW': `${SITE_URL}/zh-TW`,
+    },
   },
 };
 

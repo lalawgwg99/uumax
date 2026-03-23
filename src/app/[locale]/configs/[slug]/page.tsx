@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import { Giscus } from "@/components/configs/Giscus";
 import { LemonSqueezyButton } from "@/components/configs/LemonSqueezyButton";
-import { ArrowLeft, Download, ExternalLink, Calendar, User, History } from "lucide-react";
+import { ArrowLeft, Download, Calendar, User, History } from "lucide-react";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 import type { ConfigItem } from "@/lib/types";
