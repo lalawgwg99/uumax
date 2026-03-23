@@ -134,7 +134,9 @@
     "quick1": "Claude Code + fullstack",
     "quick2": "Cursor + React",
     "quick3": "Best for beginners",
-    "needApiKey": "Please set your OpenRouter API key first. Visit any config page and click 'Try it' to set it up."
+    "needApiKey": "Please set your OpenRouter API key first. Visit any config page and click 'Try it' to set it up.",
+    "freeRemaining": "{count} free uses left today",
+    "setKey": "Set API key"
   },
   "healthCheck": {
     "title": "Config Health Check",

@@ -1,3 +1,4 @@
+import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,7 +11,20 @@ import { getAllConfigs } from "@/lib/configs";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
 
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const SITE_URL = "https://uumax.pages.dev";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "uumax — AI Agent Config Marketplace",
     template: "%s | uumax",
@@ -20,11 +34,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "uumax",
-    images: [{ url: "/og/default.svg", width: 1200, height: 630 }],
+    images: [{ url: `${SITE_URL}/og/default.svg`, width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/og/default.svg"],
+    images: [`${SITE_URL}/og/default.svg`],
   },
 };
 
@@ -50,14 +64,22 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider locale={locale} messages={messages}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <Header />
-        <OnboardingBanner />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <ConfigFinder configs={getAllConfigs()} />
-      </ThemeProvider>
-    </NextIntlClientProvider>
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col">
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Header />
+            <OnboardingBanner />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <ConfigFinder configs={getAllConfigs()} />
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }

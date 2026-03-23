@@ -11,7 +11,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "Generate Config — uumax",
+  title: "Generate Config",
   description: "AI-powered config generator for Claude Code, Cursor, OpenClaw, and more.",
 };
 

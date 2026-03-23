@@ -11,7 +11,7 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "Contributors — uumax",
+  title: "Contributors",
 };
 
 interface Contributor {

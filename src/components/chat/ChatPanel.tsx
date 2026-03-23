@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { X, Send, Settings, Trash2 } from "lucide-react";
 import { ApiKeyDialog } from "./ApiKeyDialog";
-import { FREE_MODELS, streamChat } from "@/lib/openrouter";
+import { FREE_MODELS, streamChat, getApiKey, consumeFreeTier } from "@/lib/openrouter";
 import type { ChatMessage } from "@/lib/openrouter";
 
 const STORAGE_KEY = "openrouter-api-key";
@@ -30,10 +30,13 @@ export function ChatPanel({ open, onClose, systemPrompt }: ChatPanelProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const auth = getApiKey();
+    if (auth) {
+      setApiKey(auth.key);
+    } else {
+      setShowKeyDialog(true);
+    }
     const storedModel = localStorage.getItem(MODEL_KEY);
-    if (stored) setApiKey(stored);
-    else setShowKeyDialog(true);
     if (storedModel && FREE_MODELS.some((m) => m.id === storedModel)) {
       setModel(storedModel);
     }
@@ -78,6 +81,9 @@ export function ChatPanel({ open, onClose, systemPrompt }: ChatPanelProps) {
         full += chunk;
         setMessages([...updated, { role: "assistant", content: full }]);
       }
+      // Consume free tier usage if applicable
+      const auth = getApiKey();
+      if (auth?.isFreeTier) consumeFreeTier();
     } catch (e: unknown) {
       if (e instanceof Error && e.name === "AbortError") return;
       if (e instanceof Error && e.message === "INVALID_KEY") {

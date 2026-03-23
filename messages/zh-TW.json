@@ -134,7 +134,9 @@
     "quick1": "Claude Code + 全端",
     "quick2": "Cursor + React",
     "quick3": "適合新手的",
-    "needApiKey": "請先設定 OpenRouter API 金鑰。到任意配置頁點「試用」來設定。"
+    "needApiKey": "請先設定 OpenRouter API 金鑰。到任意配置頁點「試用」來設定。",
+    "freeRemaining": "今日還剩 {count} 次免費",
+    "setKey": "設定 API 金鑰"
   },
   "healthCheck": {
     "title": "配置健康檢查",

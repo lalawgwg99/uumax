@@ -9,7 +9,7 @@ export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = { title: "AI Tools — uumax" };
+export const metadata: Metadata = { title: "AI Tools" };
 
 export default async function ToolsPage({
   params,

@@ -2,10 +2,11 @@
 
 import { useState, useCallback, useRef, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { MessageSquareText, X, Send, Sparkles } from "lucide-react";
-import { FREE_MODELS, streamChat, getApiKey, consumeFreeTier } from "@/lib/openrouter";
+import { MessageSquareText, X, Send, Sparkles, Key } from "lucide-react";
+import { FREE_MODELS, streamChat, getApiKey, consumeFreeTier, getFreeTierRemaining } from "@/lib/openrouter";
 import type { ChatMessage } from "@/lib/openrouter";
 import type { ConfigMeta } from "@/lib/types";
+import { ApiKeyDialog } from "@/components/chat/ApiKeyDialog";
 
 const FINDER_SYSTEM_PROMPT = `You are the uumax Config Finder — a helpful assistant on uumax.pages.dev, an AI Agent Config Marketplace.
 
@@ -38,6 +39,7 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
   const [isStreaming, setIsStreaming] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+  const [showKeyDialog, setShowKeyDialog] = useState(false);
 
   const systemPrompt = FINDER_SYSTEM_PROMPT.replace(
     "{CONFIGS}",
@@ -55,12 +57,7 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
 
     const auth = getApiKey();
     if (!auth) {
-      setMessages((prev) => [
-        ...prev,
-        { role: "user", content: input.trim() },
-        { role: "assistant", content: t("needApiKey") },
-      ]);
-      setInput("");
+      setShowKeyDialog(true);
       return;
     }
     const apiKey = auth.key;
@@ -160,6 +157,18 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
 
       {/* Input */}
       <div className="border-t border-[var(--border)] p-2">
+        {(() => {
+          const remaining = getFreeTierRemaining();
+          const hasUserKey = !!localStorage.getItem("openrouter-api-key");
+          if (!hasUserKey && remaining > 0) {
+            return (
+              <div className="text-[10px] text-[var(--fg-muted)] text-center mb-1">
+                {t("freeRemaining", { count: remaining })}
+              </div>
+            );
+          }
+          return null;
+        })()}
         <div className="flex gap-1.5">
           <input
             value={input}
@@ -170,6 +179,13 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
             disabled={isStreaming}
           />
           <button
+            onClick={() => setShowKeyDialog(true)}
+            className="rounded-lg border border-[var(--border)] px-2 py-2 text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--bg-secondary)] transition-colors"
+            title={t("setKey")}
+          >
+            <Key size={14} />
+          </button>
+          <button
             onClick={handleSend}
             disabled={isStreaming || !input.trim()}
             className="rounded-lg bg-[var(--color-brand)] px-2.5 py-2 text-white disabled:opacity-50"
@@ -178,6 +194,15 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
           </button>
         </div>
       </div>
+
+      <ApiKeyDialog
+        open={showKeyDialog}
+        onClose={() => setShowKeyDialog(false)}
+        onSave={(key) => {
+          localStorage.setItem("openrouter-api-key", key);
+          setShowKeyDialog(false);
+        }}
+      />
     </div>
   );
 }
