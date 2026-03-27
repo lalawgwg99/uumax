@@ -47,7 +47,7 @@
     "useCase": "Use Case:",
     "pricing": "Pricing:",
     "sortLatest": "Latest",
-    "sortAZ": "A \u2192 Z",
+    "sortAZ": "A → Z",
     "priceFree": "Free",
     "pricePremium": "Premium",
     "empty": "No configs match your filters. Try adjusting them.",
@@ -118,6 +118,7 @@
     "copied": "Copied!",
     "needApiKey": "Please set your OpenRouter API key first (use the Try it button on any config page).",
     "invalidKey": "Invalid API key. Please set a new one via any config's Try it button.",
+    "emptyHint": "Enter a description above to enable",
     "backHome": "Home"
   },
   "tryIt": {
@@ -188,6 +189,7 @@
     "compare": "Compare",
     "remix": "Remix",
     "freeRemaining": "{count} free uses left today",
-    "unlimitedKey": "Using your own API key"
+    "unlimitedKey": "Using your own API key",
+    "setKeyHint": "Set API key for unlimited use"
   }
 }
