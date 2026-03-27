@@ -10,7 +10,7 @@
     "badge": "AI Agent Config Marketplace",
     "title1": "Stop configuring.",
     "title2": "Start building.",
-    "description": "Production-ready configurations for Claude Code, Cursor, OpenClaw, and more. Copy, paste, and let your AI agent work the way you want.",
+    "description": "Production-ready configurations for Claude Code, Cursor, GitHub Copilot, OpenClaw, and more. Copy, paste, and let your AI agent work the way you want.",
     "browseCta": "Browse Configs",
     "contributeCta": "Contribute"
   },
@@ -67,6 +67,7 @@
     "step2cursor": "Save as .cursorrules in your project root.",
     "step2openclaw": "Save as AGENTS.md in your workspace directory.",
     "step2windsurf": "Save as .windsurfrules in your project root.",
+    "step2copilot": "Save as .github/copilot-instructions.md in your repo.",
     "step2generic": "Save as a text file in your project.",
     "step3Title": "Done",
     "step3Desc": "The AI agent will now follow the rules defined in this config."
@@ -180,7 +181,9 @@
     "remixing": "Remixing...",
     "copy": "Copy",
     "copied": "Copied!",
-    "needApiKey": "Please set your OpenRouter API key first."
+    "needApiKey": "Please set your OpenRouter API key first.",
+    "exportAs": "Export for other tools",
+    "exportHint": "Same content, saved as the config file for each tool"
   },
   "tools": {
     "title": "AI Tools",

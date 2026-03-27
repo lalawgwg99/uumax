@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Shuffle, Copy, Check } from "lucide-react";
+import { Shuffle, Copy, Check, Download } from "lucide-react";
 import { useAI } from "@/lib/useAI";
 import type { ConfigMeta } from "@/lib/types";
 
@@ -11,6 +11,26 @@ const SYSTEM_PROMPT = `You are a config remixer. The user selected a base AI age
 Take the original config and modify it according to the user's instructions. Output ONLY the complete modified config in a single markdown code block. Do not explain — just output the remixed config.
 
 Keep the same structure and quality as the original, but adapt it to the user's needs.`;
+
+const EXPORT_FORMATS = [
+  { label: "CLAUDE.md", filename: "CLAUDE.md" },
+  { label: ".cursorrules", filename: ".cursorrules" },
+  { label: "copilot-instructions.md", filename: "copilot-instructions.md" },
+  { label: ".windsurfrules", filename: ".windsurfrules" },
+  { label: "AGENTS.md", filename: "AGENTS.md" },
+];
+
+function downloadAs(content: string, filename: string) {
+  const blob = new Blob([content], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
 
 interface Props {
   configs: ConfigMeta[];
@@ -23,6 +43,11 @@ export function RemixTab({ configs }: Props) {
   const [copied, setCopied] = useState(false);
   const { result, isStreaming, error, run } = useAI({ systemPrompt: SYSTEM_PROMPT });
 
+  const getCleanContent = () => {
+    const codeMatch = result.match(/```[\w]*\n([\s\S]*?)```/);
+    return codeMatch ? codeMatch[1].trim() : result;
+  };
+
   const handleRemix = () => {
     if (!slug || !instruction.trim()) return;
     const config = configs.find((c) => c.slug === slug);
@@ -34,9 +59,7 @@ export function RemixTab({ configs }: Props) {
   };
 
   const handleCopy = async () => {
-    const codeMatch = result.match(/```[\w]*\n([\s\S]*?)```/);
-    const code = codeMatch ? codeMatch[1].trim() : result;
-    await navigator.clipboard.writeText(code);
+    await navigator.clipboard.writeText(getCleanContent());
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -75,7 +98,7 @@ export function RemixTab({ configs }: Props) {
         {isStreaming ? t("remixing") : t("remix")}
       </button>
       {result && (
-        <div className="space-y-3">
+        <div className="space-y-4">
           <div className="flex justify-end">
             <button onClick={handleCopy} className="inline-flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg border border-[var(--border)] hover:bg-[var(--bg-secondary)] transition-colors">
               {copied ? <Check size={14} className="text-emerald-500" /> : <Copy size={14} />}
@@ -85,6 +108,26 @@ export function RemixTab({ configs }: Props) {
           <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4">
             <pre className="whitespace-pre-wrap text-sm font-mono leading-relaxed">{result}</pre>
           </div>
+          {!isStreaming && (
+            <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-secondary)] p-4 space-y-3">
+              <div>
+                <p className="text-sm font-medium">{t("exportAs")}</p>
+                <p className="text-xs text-[var(--fg-muted)] mt-0.5">{t("exportHint")}</p>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {EXPORT_FORMATS.map((fmt) => (
+                  <button
+                    key={fmt.filename}
+                    onClick={() => downloadAs(getCleanContent(), fmt.filename)}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg border border-[var(--border)] hover:bg-[var(--bg-tertiary)] transition-colors font-mono"
+                  >
+                    <Download size={12} />
+                    {fmt.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>

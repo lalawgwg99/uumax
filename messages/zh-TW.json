@@ -10,7 +10,7 @@
     "badge": "AI Agent 配置市集",
     "title1": "別再折騰配置。",
     "title2": "專心寫程式。",
-    "description": "現成的 Claude Code、Cursor、OpenClaw 等 AI 代理配置。複製、貼上，讓你的 AI 按照你想要的方式工作。",
+    "description": "現成的 Claude Code、Cursor、GitHub Copilot、OpenClaw 等 AI 代理配置。複製、貼上，讓你的 AI 按照你想要的方式工作。",
     "browseCta": "瀏覽配置",
     "contributeCta": "貢獻配置"
   },
@@ -67,6 +67,7 @@
     "step2cursor": "存為專案根目錄的 .cursorrules。",
     "step2openclaw": "存為工作區目錄的 AGENTS.md。",
     "step2windsurf": "存為專案根目錄的 .windsurfrules。",
+    "step2copilot": "存為 .github/copilot-instructions.md。",
     "step2generic": "存為專案中的文字檔。",
     "step3Title": "完成",
     "step3Desc": "AI Agent 現在會遵循這個配置中定義的規則。"
@@ -180,7 +181,9 @@
     "remixing": "重混中...",
     "copy": "複製",
     "copied": "已複製！",
-    "needApiKey": "請先設定 OpenRouter API 金鑰。"
+    "needApiKey": "請先設定 OpenRouter API 金鑰。",
+    "exportAs": "匯出為其他工具",
+    "exportHint": "相同內容，另存為不同格式的配置檔"
   },
   "tools": {
     "title": "AI 工具",
