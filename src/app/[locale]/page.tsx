@@ -5,14 +5,25 @@ import { getFeaturedConfigs, getAllConfigs } from "@/lib/configs";
 import { ConfigCard } from "@/components/configs/ConfigCard";
 import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import type { Framework, UseCase } from "@/lib/types";
-import { Zap, Copy, Share2, Layers, ArrowRight, AlertCircle, CheckCircle2 } from "lucide-react";
+import {
+  Zap, Copy, Share2, Layers, ArrowRight, AlertCircle, CheckCircle2,
+  Terminal, MousePointer2, MessageSquare, Wind,
+} from "lucide-react";
 
-const FRAMEWORK_ICONS: Record<Framework, string> = {
-  "claude-code": "CC",
-  cursor: "Cu",
-  openclaw: "OC",
-  windsurf: "WS",
-  generic: "Gn",
+const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
+  "claude-code": Terminal,
+  cursor: MousePointer2,
+  openclaw: MessageSquare,
+  windsurf: Wind,
+  generic: Terminal,
+};
+
+const FRAMEWORK_COLOR: Record<Framework, string> = {
+  "claude-code": "text-orange-500 bg-orange-500/10",
+  cursor: "text-blue-500 bg-blue-500/10",
+  openclaw: "text-purple-500 bg-purple-500/10",
+  windsurf: "text-cyan-500 bg-cyan-500/10",
+  generic: "text-[var(--fg-muted)] bg-[var(--bg-secondary)]",
 };
 
 export default async function HomePage({
@@ -174,23 +185,26 @@ function HomeContent({
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {(Object.entries(FRAMEWORK_LABELS) as [Framework, string][])
             .filter(([fw]) => fw !== "generic")
-            .map(([fw, label]) => (
-              <Link
-                key={fw}
-                href={`/configs?framework=${fw}`}
-                className="flex flex-col items-center gap-2 p-6 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-[var(--color-brand)]/40 transition-all"
-              >
-                <span className="text-2xl font-bold text-[var(--color-brand)]">
-                  {FRAMEWORK_ICONS[fw]}
-                </span>
-                <span className="font-medium">{label}</span>
-                <span className="text-xs text-[var(--fg-muted)]">
-                  {t("frameworks.configs", {
-                    count: frameworkCounts[fw] || 0,
-                  })}
-                </span>
-              </Link>
-            ))}
+            .map(([fw, label]) => {
+              const FwIcon = FRAMEWORK_ICON[fw];
+              return (
+                <Link
+                  key={fw}
+                  href={`/configs?framework=${fw}`}
+                  className="flex flex-col items-center gap-2 p-6 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-[var(--color-brand)]/40 transition-all"
+                >
+                  <span className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${FRAMEWORK_COLOR[fw]}`}>
+                    <FwIcon size={24} />
+                  </span>
+                  <span className="font-medium">{label}</span>
+                  <span className="text-xs text-[var(--fg-muted)]">
+                    {t("frameworks.configs", {
+                      count: frameworkCounts[fw] || 0,
+                    })}
+                  </span>
+                </Link>
+              );
+            })}
         </div>
       </section>
 
