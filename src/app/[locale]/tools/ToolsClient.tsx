@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
-import { Stethoscope, GitCompareArrows, Shuffle, Sparkles, Lock } from "lucide-react";
+import { Stethoscope, GitCompareArrows, Shuffle, Sparkles, Lock, ExternalLink } from "lucide-react";
 import { getFreeTierRemaining, getApiKey } from "@/lib/openrouter";
 import { HealthCheckTab } from "./tabs/HealthCheckTab";
 import { CompareTab } from "./tabs/CompareTab";
@@ -54,9 +54,19 @@ export function ToolsClient({ configs }: Props) {
             {t("unlimitedKey")}
           </span>
         ) : (
-          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)]">
+          <span className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[var(--color-brand)]/10 text-[var(--color-brand)]">
             <Lock size={14} />
             {t("freeRemaining", { count: remaining })}
+            <span className="opacity-40">·</span>
+            <a
+              href="https://openrouter.ai/keys"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-0.5 text-xs text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors underline underline-offset-2"
+            >
+              {t("setKeyHint")}
+              <ExternalLink size={10} />
+            </a>
           </span>
         )}
       </div>
