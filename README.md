@@ -104,7 +104,6 @@ featured: false
 ---
 
 你的配置內容寫在這裡...
-```
 
 送出 PR 即可。詳細說明見 [投稿指南](https://uumax.pages.dev/submit)。
 
