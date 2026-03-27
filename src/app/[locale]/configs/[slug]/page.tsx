@@ -76,7 +76,7 @@ function ConfigDetailContent({ config, related }: { config: ConfigItem; related:
             <Badge key={uc}>{USECASE_LABELS[uc]}</Badge>
           ))}
           {config.pricing === "free" ? (
-            <Badge variant="green">Free</Badge>
+            <Badge variant="green">{t("priceFree")}</Badge>
           ) : (
             <Badge variant="amber">${config.price}</Badge>
           )}
