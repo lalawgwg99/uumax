@@ -6,7 +6,6 @@ import { ThemeProvider } from "next-themes";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { OnboardingBanner } from "@/components/layout/OnboardingBanner";
-import { ConfigFinder } from "@/components/assistant/ConfigFinder";
 import { getAllConfigs } from "@/lib/configs";
 import { routing } from "@/i18n/routing";
 import type { Metadata } from "next";
@@ -83,7 +82,6 @@ export default async function LocaleLayout({
             <OnboardingBanner />
             <main className="flex-1">{children}</main>
             <Footer />
-            <ConfigFinder configs={getAllConfigs()} />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
