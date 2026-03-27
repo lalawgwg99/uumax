@@ -4,6 +4,7 @@
     "submit": "投稿",
     "generate": "產生器",
     "tools": "工具",
+    "skills": "Skills",
     "github": "GitHub"
   },
   "hero": {
@@ -98,7 +99,7 @@
     "title": "什麼是 AI Agent 配置？",
     "description": "Claude Code、Cursor、Windsurf 等 AI 程式工具透過配置檔（CLAUDE.md、.cursorrules 等）來了解你的程式風格、專案規範和工作流程。好的配置讓通用 AI 變成你的專屬資深工程師。",
     "without": "沒有配置",
-    "withoutDesc": "回答很通用，不了解你的專案，反覆犯同樣的錯",
+    "withoutDesc": "回答很通用，不了解你的專案，反複犯同樣的錯",
     "with": "有配置",
     "withDesc": "熟悉你的技術棧，遵守你的規範，按你的方式寫程式"
   },
@@ -196,5 +197,20 @@
     "freeRemaining": "今日還剩 {count} 次免費",
     "unlimitedKey": "使用你自己的 API 金鑰",
     "setKeyHint": "設定 API 金鑰以無限使用"
+  },
+  "skills": {
+    "title": "Skill 市集",
+    "subtitle": "瀏覽並安裝精選的 MCP 伺服器與 AI Skills。品質審核，即裝即用。",
+    "search": "搜尋 Skills...",
+    "allCategories": "全部",
+    "install": "安裝",
+    "repo": "原始碼",
+    "docs": "文件",
+    "free": "免費",
+    "premium": "付費",
+    "verified": "已驗證",
+    "featured": "精選",
+    "empty": "沒有符合的 Skills。",
+    "backHome": "首頁"
   }
 }

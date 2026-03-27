@@ -4,6 +4,7 @@
     "submit": "Submit",
     "generate": "Generate",
     "tools": "Tools",
+    "skills": "Skills",
     "github": "GitHub"
   },
   "hero": {
@@ -196,5 +197,20 @@
     "freeRemaining": "{count} free uses left today",
     "unlimitedKey": "Using your own API key",
     "setKeyHint": "Set API key for unlimited use"
+  },
+  "skills": {
+    "title": "Skill Marketplace",
+    "subtitle": "Browse and install curated MCP servers and AI skills. Quality-reviewed, ready to plug in.",
+    "search": "Search skills...",
+    "allCategories": "All",
+    "install": "Install",
+    "repo": "Repo",
+    "docs": "Docs",
+    "free": "Free",
+    "premium": "Premium",
+    "verified": "Verified",
+    "featured": "Featured",
+    "empty": "No skills match your search.",
+    "backHome": "Home"
   }
 }
