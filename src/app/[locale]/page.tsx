@@ -7,7 +7,7 @@ import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import type { Framework, UseCase } from "@/lib/types";
 import {
   Zap, Copy, Share2, Layers, ArrowRight, AlertCircle, CheckCircle2,
-  Terminal, MousePointer2, MessageSquare, Wind, Bot,
+  Terminal, MousePointer2, MessageSquare, Wind, Bot, Code2,
 } from "lucide-react";
 
 const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
@@ -16,6 +16,8 @@ const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
   openclaw: MessageSquare,
   windsurf: Wind,
   copilot: Bot,
+  continue: Zap,
+  aider: Code2,
   generic: Terminal,
 };
 
@@ -25,6 +27,8 @@ const FRAMEWORK_COLOR: Record<Framework, string> = {
   openclaw: "text-purple-500 bg-purple-500/10",
   windsurf: "text-cyan-500 bg-cyan-500/10",
   copilot: "text-green-500 bg-green-500/10",
+  continue: "text-teal-500 bg-teal-500/10",
+  aider: "text-rose-500 bg-rose-500/10",
   generic: "text-[var(--fg-muted)] bg-[var(--bg-secondary)]",
 };
 
@@ -184,7 +188,7 @@ function HomeContent({
         <h2 className="text-2xl font-bold text-center mb-10">
           {t("frameworks.title")}
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {(Object.entries(FRAMEWORK_LABELS) as [Framework, string][])
             .filter(([fw]) => fw !== "generic")
             .map(([fw, label]) => {

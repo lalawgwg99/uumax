@@ -2,7 +2,7 @@ import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS } from "@/lib/types";
 import type { ConfigMeta, Framework } from "@/lib/types";
-import { ArrowRight, Terminal, MousePointer2, MessageSquare, Wind, FileText, Bot } from "lucide-react";
+import { ArrowRight, Terminal, MousePointer2, MessageSquare, Wind, FileText, Bot, Zap, Code2 } from "lucide-react";
 
 const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
   "claude-code": Terminal,
@@ -10,6 +10,8 @@ const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
   openclaw: MessageSquare,
   windsurf: Wind,
   copilot: Bot,
+  continue: Zap,
+  aider: Code2,
   generic: FileText,
 };
 
@@ -19,6 +21,8 @@ const FRAMEWORK_ACCENT: Record<Framework, { icon: string; border: string }> = {
   openclaw: { icon: "text-purple-500 bg-purple-500/10", border: "hover:border-purple-400/50" },
   windsurf: { icon: "text-cyan-500 bg-cyan-500/10", border: "hover:border-cyan-400/50" },
   copilot: { icon: "text-green-500 bg-green-500/10", border: "hover:border-green-400/50" },
+  continue: { icon: "text-teal-500 bg-teal-500/10", border: "hover:border-teal-400/50" },
+  aider: { icon: "text-rose-500 bg-rose-500/10", border: "hover:border-rose-400/50" },
   generic: { icon: "text-[var(--fg-muted)] bg-[var(--bg-secondary)]", border: "hover:border-[var(--color-brand)]/40" },
 };
 

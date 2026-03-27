@@ -10,7 +10,7 @@
     "badge": "AI Agent Config Marketplace",
     "title1": "Stop configuring.",
     "title2": "Start building.",
-    "description": "Production-ready configurations for Claude Code, Cursor, GitHub Copilot, OpenClaw, and more. Copy, paste, and let your AI agent work the way you want.",
+    "description": "Production-ready configurations for Claude Code, Cursor, GitHub Copilot, Continue.dev, Aider, and more. One place for every AI coding tool.",
     "browseCta": "Browse Configs",
     "contributeCta": "Contribute"
   },
@@ -68,6 +68,8 @@
     "step2openclaw": "Save as AGENTS.md in your workspace directory.",
     "step2windsurf": "Save as .windsurfrules in your project root.",
     "step2copilot": "Save as .github/copilot-instructions.md in your repo.",
+    "step2continue": "Save as config.yaml in your ~/.continue/ directory.",
+    "step2aider": "Save as .aider.conf.yml in your project root.",
     "step2generic": "Save as a text file in your project.",
     "step3Title": "Done",
     "step3Desc": "The AI agent will now follow the rules defined in this config."

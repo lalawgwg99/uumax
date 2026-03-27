@@ -10,7 +10,7 @@
     "badge": "AI Agent 配置市集",
     "title1": "別再折騰配置。",
     "title2": "專心寫程式。",
-    "description": "現成的 Claude Code、Cursor、GitHub Copilot、OpenClaw 等 AI 代理配置。複製、貼上，讓你的 AI 按照你想要的方式工作。",
+    "description": "Claude Code、Cursor、GitHub Copilot、Continue.dev、Aider 等所有 AI 工具的現成配置。一個地方搞定全部。",
     "browseCta": "瀏覽配置",
     "contributeCta": "貢獻配置"
   },
@@ -68,6 +68,8 @@
     "step2openclaw": "存為工作區目錄的 AGENTS.md。",
     "step2windsurf": "存為專案根目錄的 .windsurfrules。",
     "step2copilot": "存為 .github/copilot-instructions.md。",
+    "step2continue": "存為 ~/.continue/config.yaml。",
+    "step2aider": "存為專案根目錄的 .aider.conf.yml。",
     "step2generic": "存為專案中的文字檔。",
     "step3Title": "完成",
     "step3Desc": "AI Agent 現在會遵循這個配置中定義的規則。"
