@@ -9,34 +9,11 @@ pricing: "free"
 installCmd: "npx @modelcontextprotocol/server-postgres"
 repoUrl: "https://github.com/modelcontextprotocol/servers/tree/main/src/postgres"
 docsUrl: "https://modelcontextprotocol.io/docs"
-compatibleWith: ["claude-code", "cursor", "continue", "generic"]
+compatibleWith: ["claude-code", "cursor", "continue", "antigravity", "generic"]
 version: "1.0.0"
 lastUpdated: "2026-03-27"
 featured: false
 verified: true
 ---
 
-Official MCP server for PostgreSQL. Provides read-only query access to your database.
-
-## Capabilities
-- Run SELECT queries
-- Explore table schemas and relationships
-- List databases and tables
-- Describe table structure
-
-## Setup
-
-```json
-{
-  "mcpServers": {
-    "postgres": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "@modelcontextprotocol/server-postgres",
-        "postgresql://user:password@localhost/dbname"
-      ]
-    }
-  }
-}
-```
+Official MCP server for PostgreSQL.

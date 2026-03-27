@@ -1,4 +1,4 @@
-export type Framework = "claude-code" | "cursor" | "openclaw" | "windsurf" | "copilot" | "continue" | "aider" | "generic";
+export type Framework = "claude-code" | "cursor" | "openclaw" | "windsurf" | "copilot" | "continue" | "aider" | "antigravity" | "generic";
 
 export type UseCase =
   | "frontend"
@@ -18,6 +18,7 @@ export type ConfigType =
   | "copilot-instructions"
   | "continue-config"
   | "aider-conf"
+  | "antigravity-rules"
   | "mcp-config"
   | "hooks"
   | "system-prompt"
@@ -56,6 +57,7 @@ export const FRAMEWORK_LABELS: Record<Framework, string> = {
   copilot: "GitHub Copilot",
   continue: "Continue.dev",
   aider: "Aider",
+  antigravity: "Antigravity",
   generic: "Generic",
 };
 
