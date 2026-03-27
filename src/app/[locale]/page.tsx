@@ -7,7 +7,7 @@ import { FRAMEWORK_LABELS, USECASE_LABELS } from "@/lib/types";
 import type { Framework, UseCase } from "@/lib/types";
 import {
   Zap, Copy, Share2, Layers, ArrowRight, AlertCircle, CheckCircle2,
-  Terminal, MousePointer2, MessageSquare, Wind,
+  Terminal, MousePointer2, MessageSquare, Wind, Bot,
 } from "lucide-react";
 
 const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
@@ -15,6 +15,7 @@ const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
   cursor: MousePointer2,
   openclaw: MessageSquare,
   windsurf: Wind,
+  copilot: Bot,
   generic: Terminal,
 };
 
@@ -23,6 +24,7 @@ const FRAMEWORK_COLOR: Record<Framework, string> = {
   cursor: "text-blue-500 bg-blue-500/10",
   openclaw: "text-purple-500 bg-purple-500/10",
   windsurf: "text-cyan-500 bg-cyan-500/10",
+  copilot: "text-green-500 bg-green-500/10",
   generic: "text-[var(--fg-muted)] bg-[var(--bg-secondary)]",
 };
 
@@ -182,7 +184,7 @@ function HomeContent({
         <h2 className="text-2xl font-bold text-center mb-10">
           {t("frameworks.title")}
         </h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
           {(Object.entries(FRAMEWORK_LABELS) as [Framework, string][])
             .filter(([fw]) => fw !== "generic")
             .map(([fw, label]) => {
@@ -191,12 +193,12 @@ function HomeContent({
                 <Link
                   key={fw}
                   href={`/configs?framework=${fw}`}
-                  className="flex flex-col items-center gap-2 p-6 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-[var(--color-brand)]/40 transition-all"
+                  className="flex flex-col items-center gap-2 p-5 rounded-xl border border-[var(--border)] bg-[var(--card-bg)] hover:border-[var(--color-brand)]/40 transition-all"
                 >
-                  <span className={`inline-flex items-center justify-center w-12 h-12 rounded-xl ${FRAMEWORK_COLOR[fw]}`}>
-                    <FwIcon size={24} />
+                  <span className={`inline-flex items-center justify-center w-11 h-11 rounded-xl ${FRAMEWORK_COLOR[fw]}`}>
+                    <FwIcon size={22} />
                   </span>
-                  <span className="font-medium">{label}</span>
+                  <span className="font-medium text-sm text-center">{label}</span>
                   <span className="text-xs text-[var(--fg-muted)]">
                     {t("frameworks.configs", {
                       count: frameworkCounts[fw] || 0,
