@@ -47,7 +47,7 @@
     "useCase": "場景：",
     "pricing": "價格：",
     "sortLatest": "最新",
-    "sortAZ": "A \u2192 Z",
+    "sortAZ": "A → Z",
     "priceFree": "免費",
     "pricePremium": "付費",
     "empty": "沒有符合條件的配置，試試調整篩選。",
@@ -118,6 +118,7 @@
     "copied": "已複製！",
     "needApiKey": "請先設定 OpenRouter API 金鑰（在任意配置頁點「試用」按鈕）。",
     "invalidKey": "API 金鑰無效，請透過試用按鈕重新設定。",
+    "emptyHint": "請先填寫上方的配置描述",
     "backHome": "首頁"
   },
   "tryIt": {
@@ -188,6 +189,7 @@
     "compare": "比較",
     "remix": "重混",
     "freeRemaining": "今日還剩 {count} 次免費",
-    "unlimitedKey": "使用你自己的 API 金鑰"
+    "unlimitedKey": "使用你自己的 API 金鑰",
+    "setKeyHint": "設定 API 金鑰以無限使用"
   }
 }
