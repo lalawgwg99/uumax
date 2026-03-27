@@ -33,6 +33,12 @@ export function Header() {
             {t("skills")}
           </Link>
           <Link
+            href="/guide"
+            className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors hidden sm:block"
+          >
+            {t("guide")}
+          </Link>
+          <Link
             href="/tools"
             className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors hidden sm:block"
           >
@@ -80,6 +86,13 @@ export function Header() {
               className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors py-1"
             >
               {t("skills")}
+            </Link>
+            <Link
+              href="/guide"
+              onClick={() => setMenuOpen(false)}
+              className="text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors py-1"
+            >
+              {t("guide")}
             </Link>
             <Link
               href="/tools"
