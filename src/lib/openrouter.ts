@@ -8,15 +8,14 @@ export interface ModelOption {
   name: string;
 }
 
-// Verified working free endpoints on OpenRouter (as of 2026-03)
-// deepseek-chat-v3-0324:free was removed — that snapshot has no free endpoint.
-// Use deepseek/deepseek-r1:free or other confirmed free models instead.
+// Verified free endpoints from https://openrouter.ai/models?q=:free (2026-03-27)
+// Sorted by weekly usage — all confirmed active
 export const FREE_MODELS: ModelOption[] = [
-  { id: "deepseek/deepseek-r1:free", name: "DeepSeek R1" },
-  { id: "google/gemma-3-27b-it:free", name: "Gemma 3 27B" },
+  { id: "stepfun/step-3.5-flash:free", name: "Step 3.5 Flash" },
+  { id: "nvidia/nemotron-3-super-120b-a12b:free", name: "Nemotron 3 Super 120B" },
   { id: "meta-llama/llama-3.3-70b-instruct:free", name: "Llama 3.3 70B" },
-  { id: "mistralai/mistral-7b-instruct:free", name: "Mistral 7B" },
-  { id: "microsoft/phi-3-mini-128k-instruct:free", name: "Phi-3 Mini" },
+  { id: "google/gemma-3-27b-it:free", name: "Gemma 3 27B" },
+  { id: "mistralai/mistral-small-3.1-24b-instruct:free", name: "Mistral Small 3.1 24B" },
 ];
 
 // Public free tier: limited daily uses with a shared key
