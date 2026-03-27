@@ -122,15 +122,20 @@ Config file format: ${framework === "claude-code" ? "CLAUDE.md" : framework === 
             </div>
           )}
 
-          <button
-            onClick={handleGenerate}
-            disabled={!description.trim()}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--color-brand)] text-white font-medium hover:bg-[var(--color-brand-dark)] transition-colors disabled:opacity-50"
-          >
-            <Wand2 size={16} />
-            {t("generate")}
-            <ChevronRight size={16} />
-          </button>
+          <div className="space-y-1.5">
+            <button
+              onClick={handleGenerate}
+              disabled={!description.trim()}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[var(--color-brand)] text-white font-medium hover:bg-[var(--color-brand-dark)] transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              <Wand2 size={16} />
+              {t("generate")}
+              <ChevronRight size={16} />
+            </button>
+            {!description.trim() && (
+              <p className="text-xs text-[var(--fg-muted)]">{t("emptyHint")}</p>
+            )}
+          </div>
         </div>
       ) : (
         <div className="space-y-4">
