@@ -21,12 +21,12 @@ export function LocaleSwitcher() {
   return (
     <button
       onClick={() => router.replace(pathname, { locale: nextLocale })}
-      className="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors flex items-center gap-1 text-sm"
+      className="p-2 rounded-lg hover:bg-[var(--bg-secondary)] transition-colors flex items-center gap-1.5 text-sm"
       aria-label="Switch language"
     >
       <Globe size={16} />
       <span className="hidden sm:inline">
-        {LOCALE_LABELS[nextLocale]}
+        {LOCALE_LABELS[locale]}
       </span>
     </button>
   );
