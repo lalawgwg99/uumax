@@ -2,13 +2,14 @@ import { Link } from "@/i18n/navigation";
 import { Badge } from "@/components/ui/Badge";
 import { FRAMEWORK_LABELS } from "@/lib/types";
 import type { ConfigMeta, Framework } from "@/lib/types";
-import { ArrowRight, Terminal, MousePointer2, MessageSquare, Wind, FileText } from "lucide-react";
+import { ArrowRight, Terminal, MousePointer2, MessageSquare, Wind, FileText, Bot } from "lucide-react";
 
 const FRAMEWORK_ICON: Record<Framework, React.ElementType> = {
   "claude-code": Terminal,
   cursor: MousePointer2,
   openclaw: MessageSquare,
   windsurf: Wind,
+  copilot: Bot,
   generic: FileText,
 };
 
@@ -17,6 +18,7 @@ const FRAMEWORK_ACCENT: Record<Framework, { icon: string; border: string }> = {
   cursor: { icon: "text-blue-500 bg-blue-500/10", border: "hover:border-blue-400/50" },
   openclaw: { icon: "text-purple-500 bg-purple-500/10", border: "hover:border-purple-400/50" },
   windsurf: { icon: "text-cyan-500 bg-cyan-500/10", border: "hover:border-cyan-400/50" },
+  copilot: { icon: "text-green-500 bg-green-500/10", border: "hover:border-green-400/50" },
   generic: { icon: "text-[var(--fg-muted)] bg-[var(--bg-secondary)]", border: "hover:border-[var(--color-brand)]/40" },
 };
 
