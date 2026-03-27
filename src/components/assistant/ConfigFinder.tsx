@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useCallback, useRef, useEffect } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { MessageSquareText, X, Send, Sparkles, Key } from "lucide-react";
 import { FREE_MODELS, streamChat, getApiKey, consumeFreeTier, getFreeTierRemaining } from "@/lib/openrouter";
 import type { ChatMessage } from "@/lib/openrouter";
@@ -33,6 +33,7 @@ interface ConfigFinderProps {
 
 export function ConfigFinder({ configs }: ConfigFinderProps) {
   const t = useTranslations("finder");
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -145,7 +146,7 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
               }`}
               dangerouslySetInnerHTML={
                 msg.role === "assistant"
-                  ? { __html: renderLinks(msg.content || (isStreaming && i === messages.length - 1 ? "..." : "")) }
+                  ? { __html: renderLinks(msg.content || (isStreaming && i === messages.length - 1 ? "..." : ""), locale) }
                   : undefined
               }
             >
@@ -207,7 +208,7 @@ export function ConfigFinder({ configs }: ConfigFinderProps) {
   );
 }
 
-function renderLinks(text: string): string {
+function renderLinks(text: string, locale: string = "en"): string {
   return text
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
@@ -215,8 +216,15 @@ function renderLinks(text: string): string {
     .replace(
       /\[([^\]]+)\]\(([^)]+)\)/g,
       (_, label, url) => {
-        if (url.startsWith("/") || url.startsWith("https://")) {
-          return `<a href="${url}" class="text-[var(--color-brand)] underline hover:no-underline">${label}</a>`;
+        if (url.startsWith("/")) {
+          // Prepend locale to relative URLs to preserve language context
+          const localizedUrl = url.startsWith(`/${locale}/`) || url === `/${locale}`
+            ? url
+            : `/${locale}${url}`;
+          return `<a href="${localizedUrl}" class="text-[var(--color-brand)] underline hover:no-underline">${label}</a>`;
+        }
+        if (url.startsWith("https://")) {
+          return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="text-[var(--color-brand)] underline hover:no-underline">${label}</a>`;
         }
         return label;
       }
